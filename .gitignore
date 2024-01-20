@@ -1,0 +1,5 @@
+debian/jet
+debian/deb*
+debian/.deb*
+debian/jet*
+docs/build

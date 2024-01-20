@@ -1,0 +1,6 @@
+sudo apt install qt6-tools
+
+sudo apt install pyqt6-dev-tools
+
+to build a deb from the top most directory
+debuild -us -uc

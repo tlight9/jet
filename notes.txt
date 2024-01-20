@@ -1,0 +1,9 @@
+dpkg-buildpackage -us -uc
+
+sudo apt install python3-pyqt6.qtquick3d
+sudo apt install python3-pyqt6.qtquick
+sudo apt install qml6-module-qtquick
+sudo apt install qml6-module-qtquick-controls
+sudo apt install qml6-module-qtquick-templates
+sudo apt install qml6-module-qtquick-window
+sudo apt install qml6-module-qtqml-workerscript

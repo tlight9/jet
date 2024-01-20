@@ -1,0 +1,6 @@
+jet/src/jet usr/bin
+jet/src/jet.ui usr/lib/libjet
+jet/src/libjet/jet.qss usr/lib/libjet
+
+jet/src/libjet/*.py usr/lib/python3/dist-packages/libjet
+

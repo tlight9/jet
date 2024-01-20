@@ -1,0 +1,145 @@
+#!/usr/bin/env python3
+
+import sys, os, subprocess
+
+from PyQt6.QtWidgets import QApplication, QMainWindow
+from PyQt6 import uic
+from PyQt6.QtCore import Qt, QTimer, QEvent
+
+# disable cache usage must be before any local imports
+sys.dont_write_bytecode = True
+
+import linuxcnc
+
+from libjet import connections
+from libjet import commands
+from libjet import status
+from libjet import startup
+from libjet import editor
+
+BUILD_DATE = '1/20/24'
+VERSION = '0.0.1'
+
+class jet_gui(QMainWindow):
+	def __init__(self):
+		super().__init__()
+		'''
+		if os.path.split(sys.argv[0])[0] == '/usr/bin':
+			self.lib_path = '/usr/lib/libmesact'
+			self.docs_path = '/usr/share/doc/mesact'
+			self.installed = True
+			uic.loadUi(os.path.join(self.lib_path, 'mesact.ui'), self)
+		else:
+			srcPath = os.path.split(os.path.realpath(sys.argv[0]))[0]
+			self.lib_path = os.path.join(srcPath, 'libmesact')
+			self.docs_path = srcPath
+			self.installed = False
+			uic.loadUi(os.path.join(srcPath, 'mesact.ui'), self)
+		stylesheet = os.path.join(self.lib_path, 'mesact.qss')
+		with open(stylesheet,'r') as fh:
+			self.setStyleSheet(fh.read())
+		'''
+		#print(os.path.split(sys.argv[0])[0]) local just returns .
+		#print(os.path.dirname(os.path.realpath(sys.argv[0]))) this returns the path for both local and installed
+
+		# get the path to the executable
+		self.path = os.path.dirname(os.path.realpath(sys.argv[0]))
+
+		# set the library path
+		if self.path == '/usr/bin':
+			self.lib_path = '/usr/lib/libjet'
+			self.gui_path = '/usr/lib/libjet'
+		else:
+			self.lib_path = os.path.join(self.path, 'libjet')
+			self.gui_path = self.path
+
+		#print(f'Program Path: {self.path}')
+		#print(f'Library Path: {self.lib_path}')
+		#print(f'GUI Path: {self.gui_path}')
+
+
+		# connect to linuxcnc
+		if not self.check_emc():
+			print('emc not running')
+			sys.exit()
+		self.emc = linuxcnc
+		self.status = linuxcnc.stat()
+		self.status.poll()
+
+		#print(self.status.gcodes[1:])
+		#print(self.status.mcodes[1:])
+
+		self.command = linuxcnc.command()
+		self.error = linuxcnc.error_channel()
+		self.in_error = False
+		self.inifile = False
+		for i in range(len(sys.argv)):
+			print(f'sys.argv{i} {sys.argv[i]}')
+			if sys.argv[i].endswith('.ini'):
+				self.inifile = linuxcnc.ini(sys.argv[i])
+				self.ini_path = os.path.split(sys.argv[i])[0]
+				break
+		if not self.inifile:
+			self.ini_path = os.path.split(self.status.ini_filename)[0]
+			self.inifile = linuxcnc.ini(self.status.ini_filename)
+
+		# find and load the gui
+		gui = self.inifile.find('DISPLAY', 'GUI') or False
+		if gui: # gui is in the ini file
+			gui_path = os.path.join(os.path.dirname(self.status.ini_filename), gui)
+			if not os.path.isfile(gui_path): # gui not found
+				gui_path = os.path.join(self.gui_path, 'jet.ui')
+		else: # no gui specified
+			gui_path = os.path.join(self.gui_path, 'jet.ui')
+
+		uic.loadUi(gui_path, self)
+
+		# find and load the stylesheet
+		stylesheet = os.path.join(self.lib_path, 'emc.qss')
+		qss = self.inifile.find('DISPLAY', 'QSS') or False
+		if qss: # load local qss file make sure it exists !!!!!
+			if os.path.isfile(os.path.join(self.ini_path, qss)):
+				stylesheet = os.path.join(self.ini_path, qss)
+
+		with open(stylesheet,'r') as fh:
+			self.setStyleSheet(fh.read())
+
+		self.joints = int(self.inifile.find('KINS', 'JOINTS')) or False
+		connections.connect(self)
+		startup.setup_jog(self)
+		startup.set_labels(self)
+		startup.set_buttons(self)
+		startup.load_combos(self)
+		startup.get_list_widgets(self)
+		startup.get_pte(self)
+		startup.load_mdi(self)
+		#startup.print_constants(self)
+		startup.test(self)
+
+		# setup and start the status update timer every 0.1 second
+		self.timer = QTimer()
+		self.timer.timeout.connect(self.update_status)
+		self.timer.start(10) # milliseconds
+		self.show()
+
+	def check_emc(self):
+		if "0x48414c32" in subprocess.getoutput('ipcs'):
+			return True
+		else:
+			return False
+
+
+	def update_status(self):
+		self.status.poll()
+		status.update(self)
+
+	def eventFilter(self, obj, event):
+		if obj is self.gcode_pte.viewport() and event.type() == QEvent.Type.MouseButtonRelease:
+			if event.button() == Qt.MouseButton.LeftButton:
+				editor.show_line(self)
+		return super(jet_gui, self).eventFilter(obj, event)
+
+if __name__ == '__main__':
+	app = QApplication(sys.argv)
+	gui = jet_gui()
+	sys.exit(app.exec())
