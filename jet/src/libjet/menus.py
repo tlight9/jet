@@ -34,6 +34,9 @@ def file_reload(parent):
 		parent.start_line_lb.setText('')
 	editor.clear_highlight(parent)
 
+def app_close(parent):
+	parent.close()
+
 def clear_mdi(parent):
 	parent.mdi_history_lw.clear()
 	path = os.path.dirname(parent.status.ini_filename)

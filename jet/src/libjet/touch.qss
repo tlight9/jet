@@ -1,0 +1,13 @@
+QPushButton
+{
+	background-color: rgba(192, 192, 192, 50%);
+	min-height: 50px;
+	min-width: 50px;
+	border:0px solid rgb(128, 128, 128);
+	border-style: outset;
+	border-width: 3px;
+	border-radius: 6px;
+	margin-bottom: 1px;
+}
+
+QTabBar::tab { height: 50px; min-width: 50px;}

@@ -8,6 +8,7 @@ EMC GUI
    install
    ini
    setup
+   menu
    controls
    labels
    style

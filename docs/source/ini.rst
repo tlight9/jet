@@ -17,4 +17,7 @@ qss file will be used.
 
 .. note:: The user ui and qss files must be in the configuration directory.
 
+To control the size of the screen add `SIZE = maximum` or `full`
+
+To use the built in qss add `INPUT = keyboard` or `touch`
 

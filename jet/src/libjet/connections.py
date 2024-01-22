@@ -51,7 +51,7 @@ def connect(parent):
 
 	# Menu Items
 	menu_actions = {'actionOpen': 'file_open', 'actionReload': 'file_reload',
-	'actionClear_MDI' : 'clear_mdi'}
+	'actionExit': 'app_close', 'actionClear_MDI': 'clear_mdi'}
 	action_list = []
 	for action in parent.findChildren(QAction):
 		if action.objectName():

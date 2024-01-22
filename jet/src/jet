@@ -95,16 +95,31 @@ class jet_gui(QMainWindow):
 		uic.loadUi(gui_path, self)
 
 		# find and load the stylesheet
-		stylesheet = os.path.join(self.lib_path, 'emc.qss')
+		stylesheet = None
+		input = self.inifile.find('DISPLAY', 'INPUT') or False
+		if input:
+			if input.lower() == 'touch':
+				stylesheet = os.path.join(self.lib_path, 'touch.qss')
+			elif input.lower() == 'keyboard':
+				stylesheet = os.path.join(self.lib_path, 'keyboard.qss')
+		else:
+			print('no input stylesheet')
+
 		qss = self.inifile.find('DISPLAY', 'QSS') or False
 		if qss: # load local qss file make sure it exists !!!!!
 			if os.path.isfile(os.path.join(self.ini_path, qss)):
 				stylesheet = os.path.join(self.ini_path, qss)
 
-		with open(stylesheet,'r') as fh:
-			self.setStyleSheet(fh.read())
+		if stylesheet is not None:
+			print(stylesheet)
+			with open(stylesheet,'r') as fh:
+				self.setStyleSheet(fh.read())
 
 		self.joints = int(self.inifile.find('KINS', 'JOINTS')) or False
+
+		size = self.inifile.find('DISPLAY', 'SIZE').lower() or False
+		print(size)
+
 		connections.connect(self)
 		startup.setup_jog(self)
 		startup.set_labels(self)
@@ -120,7 +135,12 @@ class jet_gui(QMainWindow):
 		self.timer = QTimer()
 		self.timer.timeout.connect(self.update_status)
 		self.timer.start(10) # milliseconds
-		self.show()
+		if size == 'maximum':
+			self.showMaximized()
+		elif size == 'full':
+			self.showFullScreen()
+		else:
+			self.show()
 
 	def check_emc(self):
 		if "0x48414c32" in subprocess.getoutput('ipcs'):
@@ -132,6 +152,14 @@ class jet_gui(QMainWindow):
 	def update_status(self):
 		self.status.poll()
 		status.update(self)
+
+	def keyPressEvent(self, event):
+		if event.key() == Qt.Key.Key_Escape.value:
+			self.close()
+		elif (event.modifiers() == Qt.KeyboardModifier.AltModifier |
+			Qt.KeyboardModifier.ControlModifier) and event.key() == Qt.Key.Key_X:
+			self.close()
+
 
 	def eventFilter(self, obj, event):
 		if obj is self.gcode_pte.viewport() and event.type() == QEvent.Type.MouseButtonRelease:

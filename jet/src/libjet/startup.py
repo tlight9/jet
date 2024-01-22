@@ -25,9 +25,9 @@ def setup_jog(parent):
 			jog_min = 0
 		parent.jog_vel_s.setMinimum(jog_min)
 		if jog_max:
-			parent.jog_vel_s.setMaximum(jog_max)
+			parent.jog_vel_s.setMaximum(int(float(jog_max)))
 		if jog_default:
-			parent.jog_vel_s.setValue(jog_default)
+			parent.jog_vel_s.setValue(int(float(jog_default)))
 
 		if parent.findChild(QLabel, 'min_jog_vel_lb'):
 			parent.min_jog_vel_lb.setText(f'{parent.jog_vel_s.minimum()}')
