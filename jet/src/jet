@@ -135,7 +135,13 @@ class jet_gui(QMainWindow):
 		self.timer = QTimer()
 		self.timer.timeout.connect(self.update_status)
 		self.timer.start(10) # milliseconds
-		if size == 'maximum':
+
+		# set the inital screen size
+		if size == 'minimized':
+			self.showMinimized()
+		if size == 'normal':
+			self.showNormal()
+		if size == 'maximized':
 			self.showMaximized()
 		elif size == 'full':
 			self.showFullScreen()
