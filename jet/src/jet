@@ -96,14 +96,11 @@ class jet_gui(QMainWindow):
 		# find and load the stylesheet
 		stylesheet = None
 		input = self.inifile.find('DISPLAY', 'INPUT') or False
-		print(input)
 		if input:
 			if input.lower() == 'touch':
 				stylesheet = os.path.join(self.lib_path, 'touch.qss')
 			elif input.lower() == 'keyboard':
 				stylesheet = os.path.join(self.lib_path, 'keyboard.qss')
-		else:
-			print('no input stylesheet')
 
 		qss = self.inifile.find('DISPLAY', 'QSS') or False
 		if qss: # load local qss file make sure it exists !!!!!
@@ -111,13 +108,12 @@ class jet_gui(QMainWindow):
 				stylesheet = os.path.join(self.ini_path, qss)
 
 		if stylesheet is not None:
-			print(stylesheet)
 			with open(stylesheet,'r') as fh:
 				self.setStyleSheet(fh.read())
 
 		self.joints = int(self.inifile.find('KINS', 'JOINTS')) or False
 
-		size = self.inifile.find('DISPLAY', 'SIZE').lower() or False
+		size = self.inifile.find('DISPLAY', 'SIZE') or False
 
 		connections.connect(self)
 		startup.setup_jog(self)
@@ -136,14 +132,15 @@ class jet_gui(QMainWindow):
 		self.timer.start(10) # milliseconds
 
 		# set the inital screen size
-		if size == 'minimized':
-			self.showMinimized()
-		if size == 'normal':
-			self.showNormal()
-		if size == 'maximized':
-			self.showMaximized()
-		elif size == 'full':
-			self.showFullScreen()
+		if size:
+			if size.lower() == 'minimized':
+				self.showMinimized()
+			if size.lower() == 'normal':
+				self.showNormal()
+			if size.lower() == 'maximized':
+				self.showMaximized()
+			elif size.lower() == 'full':
+				self.showFullScreen()
 		else:
 			self.show()
 
