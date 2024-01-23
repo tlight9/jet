@@ -1,13 +1,36 @@
 QPushButton
 {
-	background-color: rgba(192, 192, 192, 50%);
+	background-color: rgba(230, 230, 230, 50%);
 	min-height: 50px;
 	min-width: 50px;
-	border:0px solid rgb(128, 128, 128);
+	border: 2px solid rgb(128, 128, 128);
 	border-style: outset;
 	border-width: 3px;
-	border-radius: 6px;
+	border-radius: 10px;
 	margin-bottom: 1px;
 }
 
-QTabBar::tab { height: 50px; min-width: 50px;}
+QPushButton#exit_pb
+{
+border: none;
+background-color: rgba(0, 0, 0, 0);
+}
+
+QTabBar::tab {
+	background-color: rgba(230, 230, 230, 50%);
+	border: 2px solid rgb(128, 128, 128);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	min-width: 75px;
+	min-height: 50px;
+	padding: 0px;
+}
+
+QToolButton { /* all types of tool button */
+	background-color: rgba(230, 230, 230, 50%);
+	min-width: 75px;
+	min-height: 50px;
+	border: 2px solid rgb(128, 128, 128);
+	border-radius: 10px;
+}
+
