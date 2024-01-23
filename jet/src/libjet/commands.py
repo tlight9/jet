@@ -45,9 +45,15 @@ def estop_toggle(parent):
 	'pause_pb': 'pause',
 	'resume_pb': 'resume',
 	'stop_pb': 'stop',
+	'home_all_pb': 'home_all',
 	'home_pb_0': 'home',
 	'home_pb_1': 'home',
 	'home_pb_2': 'home',
+	'unhome_all_pb': 'unhome_all',
+	'unhome_pb_0': 'unhome',
+	'unhome_pb_1': 'unhome',
+	'unhome_pb_2': 'unhome',
+	'run_mdi_pb': 'run_mdi',
 	}
 
 def power_toggle(parent):
@@ -60,12 +66,17 @@ def power_toggle(parent):
 			parent.step_pb.setEnabled(True)
 		for i in range(parent.joints):
 			getattr(parent, f'home_pb_{i}').setEnabled(True)
+		if home_all_check(parent):
+			parent.home_all_pb.setEnabled(True)
 		parent.run_mdi_pb.setEnabled(True)
 	else:
 		parent.command.state(linuxcnc.STATE_OFF)
 		parent.power_pb.setStyleSheet('background-color: ;')
 		parent.power_pb.setText('Power Off')
+		parent.home_all_pb.setEnabled(False)
 		parent.run_mdi_pb.setEnabled(False)
+		for i in range(parent.joints):
+			getattr(parent, f'home_pb_{i}').setEnabled(False)
 
 def run(parent):
 	if parent.status.task_state == linuxcnc.STATE_ON:
@@ -122,6 +133,16 @@ def home(parent):
 	#print(f'Homed: {parent.status.homed}')
 	# home(int) home a given joint.
 
+def home_all(parent): # only works if the home sequence is set for all axes
+		set_mode(parent, MODE_MANUAL)
+		parent.command.teleop_enable(TELEOP_DISABLE)
+		parent.command.wait_complete()
+		parent.command.home(-1)
+		for i in range(parent.joints):
+			getattr(parent, f'home_pb_{i}').setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
+			getattr(parent, f'unhome_pb_{i}').setEnabled(True)
+		parent.unhome_all_pb.setEnabled(True)
+
 def unhome(parent):
 	joint = int(parent.sender().objectName()[-1])
 	if parent.status.homed[joint] == 1:
@@ -142,22 +163,29 @@ def unhome_all(parent):
 			getattr(parent, f'unhome_pb_{i}').setEnabled(False)
 		parent.unhome_all_pb.setEnabled(False)
 
+def home_all_check(parent):
+	parent.status.poll()
+	for i in range(parent.status.joints):
+		if parent.inifile.find(f'JOINT_{i}', 'HOME_SEQUENCE') is None:
+			return False
+	return True
+
 def get_jog_mode(parent):
 	parent.status.poll()
 	if parent.status.kinematics_type == linuxcnc.KINEMATICS_IDENTITY and all_homed(parent):
-		  teleop_mode = 1
-		  jjogmode = False
+		teleop_mode = 1
+		jjogmode = False
 	else:
-		  # check motion_mode since other guis (halui) could alter it
-		  if parent.status.motion_mode == linuxcnc.TRAJ_MODE_FREE:
-		      teleop_mode = 0
-		      jjogmode = True
-		  else:
-		      teleop_mode = 1
-		      jjogmode = False
-	if (   (    jjogmode and parent.status.motion_mode != linuxcnc.TRAJ_MODE_FREE)
-		  or (not jjogmode and parent.status.motion_mode != linuxcnc.TRAJ_MODE_TELEOP) ):
-		  set_motion_teleop(parent, teleop_mode)
+		# check motion_mode since other guis (halui) could alter it
+		if parent.status.motion_mode == linuxcnc.TRAJ_MODE_FREE:
+			teleop_mode = 0
+			jjogmode = True
+		else:
+			teleop_mode = 1
+			jjogmode = False
+	if ((jjogmode and parent.status.motion_mode != linuxcnc.TRAJ_MODE_FREE)
+		or (not jjogmode and parent.status.motion_mode != linuxcnc.TRAJ_MODE_TELEOP) ):
+		set_motion_teleop(parent, teleop_mode)
 	return jjogmode
 
 def jog(parent):

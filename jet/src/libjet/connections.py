@@ -17,6 +17,7 @@ def connect(parent):
 	'pause_pb': 'pause',
 	'resume_pb': 'resume',
 	'stop_pb': 'stop',
+	'home_all_pb': 'home_all',
 	'home_pb_0': 'home',
 	'home_pb_1': 'home',
 	'home_pb_2': 'home',
