@@ -20,5 +20,8 @@ qss file will be used.
 To control the initial size of the screen add `SIZE = minimized`, `normal`,
 `maximized` or `full`
 
+To exit from full screen press `Ctrl Alt x` or select `File` > `Exit` from the
+menu if you added that action to the menu.
+
 To use the built in qss add `INPUT = keyboard` or `touch`
 

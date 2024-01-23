@@ -49,6 +49,11 @@ def connect(parent):
 			getattr(parent, pb).pressed.connect(partial(getattr(commands, jog_buttons[pb]), parent))
 			getattr(parent, pb).released.connect(partial(getattr(commands, jog_buttons[pb]), parent))
 
+	if 'exit_pb' in pushbuttons:
+		#parent.exit_pb.setVisible(False)
+		parent.exit_pb.setFlat(True)
+		parent.exit_pb.pressed.connect(parent.close)
+
 	# Menu Items
 	menu_actions = {'actionOpen': 'file_open', 'actionReload': 'file_reload',
 	'actionExit': 'app_close', 'actionClear_MDI': 'clear_mdi'}

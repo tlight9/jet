@@ -74,7 +74,6 @@ class jet_gui(QMainWindow):
 		self.in_error = False
 		self.inifile = False
 		for i in range(len(sys.argv)):
-			print(f'sys.argv{i} {sys.argv[i]}')
 			if sys.argv[i].endswith('.ini'):
 				self.inifile = linuxcnc.ini(sys.argv[i])
 				self.ini_path = os.path.split(sys.argv[i])[0]
@@ -97,6 +96,7 @@ class jet_gui(QMainWindow):
 		# find and load the stylesheet
 		stylesheet = None
 		input = self.inifile.find('DISPLAY', 'INPUT') or False
+		print(input)
 		if input:
 			if input.lower() == 'touch':
 				stylesheet = os.path.join(self.lib_path, 'touch.qss')
@@ -118,7 +118,6 @@ class jet_gui(QMainWindow):
 		self.joints = int(self.inifile.find('KINS', 'JOINTS')) or False
 
 		size = self.inifile.find('DISPLAY', 'SIZE').lower() or False
-		print(size)
 
 		connections.connect(self)
 		startup.setup_jog(self)

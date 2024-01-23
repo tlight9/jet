@@ -613,8 +613,8 @@
           <property name="title">
            <string>Errors</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="0" column="0">
             <widget class="QPlainTextEdit" name="errors_pte"/>
            </item>
           </layout>
@@ -667,12 +667,24 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="exit_pb">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab">
        <attribute name="title">
-        <string>Page</string>
+        <string>Plot</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QWidget" name="plot_widget" native="true"/>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
