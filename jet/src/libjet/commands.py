@@ -1,6 +1,6 @@
 import os
 
-import linuxcnc
+import linuxcnc as emc
 #command = linuxcnc.command()
 
 TRAJ_MODE_COORD = 2
@@ -27,12 +27,12 @@ def set_motion_teleop(parent, value):
 	parent.status.poll()
 
 def estop_toggle(parent):
-	if parent.status.task_state == linuxcnc.STATE_ESTOP:
-		parent.command.state(linuxcnc.STATE_ESTOP_RESET)
+	if parent.status.task_state == emc.STATE_ESTOP:
+		parent.command.state(emc.STATE_ESTOP_RESET)
 		parent.estop_pb.setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
 		parent.power_pb.setEnabled(True)
 	else:
-		parent.command.state(linuxcnc.STATE_ESTOP)
+		parent.command.state(emc.STATE_ESTOP)
 		parent.estop_pb.setStyleSheet('background-color: rgba(255, 0, 0, 25%);')
 		parent.power_pb.setEnabled(False)
 		parent.power_pb.setStyleSheet('background-color: ;')
@@ -57,8 +57,8 @@ def estop_toggle(parent):
 	}
 
 def power_toggle(parent):
-	if parent.status.task_state == linuxcnc.STATE_ESTOP_RESET:
-		parent.command.state(linuxcnc.STATE_ON)
+	if parent.status.task_state == emc.STATE_ESTOP_RESET:
+		parent.command.state(emc.STATE_ON)
 		parent.power_pb.setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
 		parent.power_pb.setText('Power On')
 		if parent.status.file:
@@ -70,7 +70,7 @@ def power_toggle(parent):
 			parent.home_all_pb.setEnabled(True)
 		parent.run_mdi_pb.setEnabled(True)
 	else:
-		parent.command.state(linuxcnc.STATE_OFF)
+		parent.command.state(emc.STATE_OFF)
 		parent.power_pb.setStyleSheet('background-color: ;')
 		parent.power_pb.setText('Power Off')
 		parent.home_all_pb.setEnabled(False)
@@ -79,30 +79,30 @@ def power_toggle(parent):
 			getattr(parent, f'home_pb_{i}').setEnabled(False)
 
 def run(parent):
-	if parent.status.task_state == linuxcnc.STATE_ON:
-		if parent.status.task_mode != linuxcnc.MODE_AUTO:
-			parent.command.mode(linuxcnc.MODE_AUTO)
+	if parent.status.task_state == emc.STATE_ON:
+		if parent.status.task_mode != emc.MODE_AUTO:
+			parent.command.mode(emc.MODE_AUTO)
 		parent.pause_pb.setEnabled(True)
 		if parent.start_line_lb_exists:
 			if parent.start_line_lb.text():
 				n = int(parent.start_line_lb.text())
 			else:
 				n = 0
-		parent.command.auto(linuxcnc.AUTO_RUN, n)
+		parent.command.auto(emc.AUTO_RUN, n)
 
 def step(parent):
-	if parent.status.task_state == linuxcnc.STATE_ON:
-		if parent.status.task_mode != linuxcnc.MODE_AUTO:
-			parent.command.mode(linuxcnc.MODE_AUTO)
-		parent.command.auto(linuxcnc.AUTO_STEP)
+	if parent.status.task_state == emc.STATE_ON:
+		if parent.status.task_mode != emc.MODE_AUTO:
+			parent.command.mode(emc.MODE_AUTO)
+		parent.command.auto(emc.AUTO_STEP)
 
 def pause(parent):
-	if parent.status.state == linuxcnc.RCS_EXEC: # program is running
-		parent.command.auto(linuxcnc.AUTO_PAUSE)
+	if parent.status.state == emc.RCS_EXEC: # program is running
+		parent.command.auto(emc.AUTO_PAUSE)
 
 def resume(parent):
 	if parent.status.paused:
-		parent.command.auto(linuxcnc.AUTO_RESUME)
+		parent.command.auto(emc.AUTO_RESUME)
 
 def stop(parent):
 	parent.command.abort()
@@ -118,10 +118,10 @@ def all_homed(parent):
 def home(parent):
 	joint = int(parent.sender().objectName()[-1])
 	if parent.status.homed[joint] == 0:
-		if parent.status.task_mode != linuxcnc.MODE_MANUAL:
+		if parent.status.task_mode != emc.MODE_MANUAL:
 			parent.command.mode(MODE_MANUAL)
-		#if parent.status.motion_mode != linuxcnc.TRAJ_MODE_FREE:
-		#	parent.command.traj_mode(linuxcnc.TRAJ_MODE_FREE)
+		#if parent.status.motion_mode != emc.TRAJ_MODE_FREE:
+		#	parent.command.traj_mode(emc.TRAJ_MODE_FREE)
 		parent.command.home(joint)
 		parent.command.wait_complete()
 		parent.sender().setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
@@ -172,19 +172,19 @@ def home_all_check(parent):
 
 def get_jog_mode(parent):
 	parent.status.poll()
-	if parent.status.kinematics_type == linuxcnc.KINEMATICS_IDENTITY and all_homed(parent):
+	if parent.status.kinematics_type == emc.KINEMATICS_IDENTITY and all_homed(parent):
 		teleop_mode = 1
 		jjogmode = False
 	else:
 		# check motion_mode since other guis (halui) could alter it
-		if parent.status.motion_mode == linuxcnc.TRAJ_MODE_FREE:
+		if parent.status.motion_mode == emc.TRAJ_MODE_FREE:
 			teleop_mode = 0
 			jjogmode = True
 		else:
 			teleop_mode = 1
 			jjogmode = False
-	if ((jjogmode and parent.status.motion_mode != linuxcnc.TRAJ_MODE_FREE)
-		or (not jjogmode and parent.status.motion_mode != linuxcnc.TRAJ_MODE_TELEOP) ):
+	if ((jjogmode and parent.status.motion_mode != emc.TRAJ_MODE_FREE)
+		or (not jjogmode and parent.status.motion_mode != emc.TRAJ_MODE_TELEOP) ):
 		set_motion_teleop(parent, teleop_mode)
 	return jjogmode
 
@@ -210,9 +210,10 @@ def jog(parent):
 def run_mdi(parent):
 	mdi_command = parent.mdi_command_le.text()
 	if mdi_command:
-		if parent.status.task_state == linuxcnc.STATE_ON:
-			if parent.status.task_mode != linuxcnc.MODE_MDI:
-				parent.command.mode(linuxcnc.MODE_MDI)
+		if parent.status.task_state == emc.STATE_ON:
+			if parent.status.task_mode != emc.MODE_MDI:
+				parent.command.mode(emc.MODE_MDI)
+				parent.command.wait_complete()
 			parent.pause_pb.setEnabled(True)
 			parent.command.mdi(mdi_command)
 			parent.command.wait_complete()
@@ -232,5 +233,17 @@ def run_mdi(parent):
 						f.write('\n'.join(mdi_codes))
 	else:
 		print('no mdi')
+
+def touchoff(parent):
+	g5x = parent.status.g5x_index
+	axis = parent.sender().objectName()[0].upper()
+	value = parent.touchoff_dsb.value()
+	mdi_command = f'G10 L20 P{g5x} {axis}{value}'
+	if parent.status.task_state == emc.STATE_ON:
+		if parent.status.task_mode != emc.MODE_MDI:
+			parent.command.mode(emc.MODE_MDI)
+			parent.command.wait_complete()
+	parent.command.mdi(mdi_command)
+	parent.command.wait_complete()
 
 

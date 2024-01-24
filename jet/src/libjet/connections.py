@@ -26,6 +26,9 @@ def connect(parent):
 	'unhome_pb_1': 'unhome',
 	'unhome_pb_2': 'unhome',
 	'run_mdi_pb': 'run_mdi',
+	'x_touchoff_pb': 'touchoff',
+	'y_touchoff_pb': 'touchoff',
+	'z_touchoff_pb': 'touchoff',
 	}
 	pushbuttons = []
 	children = parent.findChildren(QPushButton)

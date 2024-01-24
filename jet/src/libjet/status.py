@@ -6,11 +6,14 @@ def update(parent):
 	if parent.status_lb_exists:
 		parent.status_lb.setText(task_mode[parent.status.task_mode])
 	if parent.dro_lb_x_exists:
-		parent.dro_lb_x.setText(f'{parent.status.position[0]:.4f}')
+		g5x = parent.status.g5x_offset[0]
+		parent.dro_lb_x.setText(f'{parent.status.position[0] - g5x:.4f}')
 	if parent.dro_lb_y_exists:
-		parent.dro_lb_y.setText(f'{parent.status.position[1]:.4f}')
+		g5y = parent.status.g5x_offset[1]
+		parent.dro_lb_y.setText(f'{parent.status.position[1] - g5y:.4f}')
 	if parent.dro_lb_z_exists:
-		parent.dro_lb_z.setText(f'{parent.status.position[2]:.4f}')
+		g5z = parent.status.g5x_offset[2]
+		parent.dro_lb_z.setText(f'{parent.status.position[2] - g5z:.4f}')
 
 	task_state = {1:'STATE_ESTOP', 2:'STATE_ESTOP_RESET', 3:'STATE_ON', 4:'STATE_OFF', }
 	if parent.task_state_lb_exists:

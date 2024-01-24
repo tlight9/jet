@@ -1,3 +1,9 @@
+To change the version
+dch -v 0.1.0
+
+change to released Note: you must either change something or use Ctrl o to save.
+dch --release
+
 dpkg-buildpackage -us -uc
 
 sudo apt install python3-pyqt6.qtquick3d
