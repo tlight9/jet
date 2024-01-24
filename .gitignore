@@ -2,4 +2,5 @@ debian/jet
 debian/deb*
 debian/.deb*
 debian/jet*
+debian/files
 docs/build
