@@ -17,8 +17,8 @@ from libjet import status
 from libjet import startup
 from libjet import editor
 
-BUILD_DATE = '1/20/24'
-VERSION = '0.0.1'
+BUILD_DATE = '1/24/24'
+VERSION = '0.1.0'
 
 class jet_gui(QMainWindow):
 	def __init__(self):
