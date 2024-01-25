@@ -38,24 +38,6 @@ def estop_toggle(parent):
 		parent.power_pb.setStyleSheet('background-color: ;')
 		parent.power_pb.setText('Power Off')
 
-	controls = {'estop_pb': 'estop_toggle',
-	'power_pb': 'power_toggle',
-	'run_pb': 'run',
-	'step_pb': 'step',
-	'pause_pb': 'pause',
-	'resume_pb': 'resume',
-	'stop_pb': 'stop',
-	'home_all_pb': 'home_all',
-	'home_pb_0': 'home',
-	'home_pb_1': 'home',
-	'home_pb_2': 'home',
-	'unhome_all_pb': 'unhome_all',
-	'unhome_pb_0': 'unhome',
-	'unhome_pb_1': 'unhome',
-	'unhome_pb_2': 'unhome',
-	'run_mdi_pb': 'run_mdi',
-	}
-
 def power_toggle(parent):
 	if parent.status.task_state == emc.STATE_ESTOP_RESET:
 		parent.command.state(emc.STATE_ON)
@@ -69,6 +51,7 @@ def power_toggle(parent):
 		if home_all_check(parent):
 			parent.home_all_pb.setEnabled(True)
 		parent.run_mdi_pb.setEnabled(True)
+		parent.start_spindle_pb.setEnabled(True)
 	else:
 		parent.command.state(emc.STATE_OFF)
 		parent.power_pb.setStyleSheet('background-color: ;')
@@ -77,6 +60,7 @@ def power_toggle(parent):
 		parent.run_mdi_pb.setEnabled(False)
 		for i in range(parent.joints):
 			getattr(parent, f'home_pb_{i}').setEnabled(False)
+		parent.start_spindle_pb.setEnabled(False)
 
 def run(parent):
 	if parent.status.task_state == emc.STATE_ON:
@@ -207,8 +191,11 @@ def jog(parent):
 	else:
 		parent.command.jog(JOG_STOP, jjogmode, joint)
 
-def run_mdi(parent):
-	mdi_command = parent.mdi_command_le.text()
+def run_mdi(parent, cmd=None):
+	if cmd == None:
+		mdi_command = parent.mdi_command_le.text()
+	else:
+		mdi_command = cmd
 	if mdi_command:
 		if parent.status.task_state == emc.STATE_ON:
 			if parent.status.task_mode != emc.MODE_MDI:
@@ -245,5 +232,18 @@ def touchoff(parent):
 			parent.command.wait_complete()
 	parent.command.mdi(mdi_command)
 	parent.command.wait_complete()
+
+def spindle(parent):
+	pb = parent.sender().objectName()
+	if pb == 'start_spindle_pb':
+		run_mdi(parent, f'M3 S{parent.spindle_speed_sb.value()}')
+	elif pb == 'stop_spindle_pb':
+		run_mdi(parent, 'M5')
+	elif pb == 'spindle_plus_pb':
+		parent.spindle_speed_sb.setValue(parent.spindle_speed_sb.value() + 100) 
+	elif pb == 'spindle_minus_pb':
+		parent.spindle_speed_sb.setValue(parent.spindle_speed_sb.value() - 100) 
+
+
 
 

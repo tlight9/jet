@@ -64,24 +64,24 @@ def update(parent):
 		pass
 
 	# handle errors
-	if parent.status.state == parent.emc.RCS_ERROR:
-		error = parent.error.poll()
-		if error:
-			kind, text = error
-			if kind in (parent.emc.NML_ERROR, parent.emc.OPERATOR_ERROR):
-				error_type = 'Error'
-			else:
-				error_type = 'Info'
-			parent.errors_pte.setPlainText(error_type)
-			parent.errors_pte.appendPlainText(text)
-			#tabname = 'status_tab'
-			#print(parent.tabWidget.findChild(QWidget, 'status_tab'))
-			#page = parent.tabWidget.findChild(QWidget, tabname)
-			#print(page)
-			#index = parent.tabWidget.indexOf(page)
-			#print(index)
-			if isinstance(parent.tabWidget.findChild(QWidget, 'status_tab'), QWidget):
-				parent.tabWidget.setCurrentWidget(parent.tabWidget.findChild(QWidget, 'status_tab'))
+	#if parent.status.state == parent.emc.RCS_ERROR:
+	error = parent.error.poll()
+	if error:
+		kind, text = error
+		if kind in (parent.emc.NML_ERROR, parent.emc.OPERATOR_ERROR):
+			error_type = 'Error'
+		else:
+			error_type = 'Info'
+		parent.errors_pte.setPlainText(error_type)
+		parent.errors_pte.appendPlainText(text)
+		#tabname = 'status_tab'
+		#print(parent.tabWidget.findChild(QWidget, 'status_tab'))
+		#page = parent.tabWidget.findChild(QWidget, tabname)
+		#print(page)
+		#index = parent.tabWidget.indexOf(page)
+		#print(index)
+		if isinstance(parent.tabWidget.findChild(QWidget, 'status_tab'), QWidget):
+			parent.tabWidget.setCurrentWidget(parent.tabWidget.findChild(QWidget, 'status_tab'))
 
 
 	'''

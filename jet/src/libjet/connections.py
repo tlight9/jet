@@ -29,6 +29,10 @@ def connect(parent):
 	'x_touchoff_pb': 'touchoff',
 	'y_touchoff_pb': 'touchoff',
 	'z_touchoff_pb': 'touchoff',
+	'start_spindle_pb': 'spindle',
+	'stop_spindle_pb': 'spindle',
+	'spindle_plus_pb': 'spindle',
+	'spindle_minus_pb': 'spindle',
 	}
 	pushbuttons = []
 	children = parent.findChildren(QPushButton)
