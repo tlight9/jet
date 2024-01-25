@@ -15,9 +15,17 @@ JOG_STOP = 0
 JOG_CONTINUOUS = 1
 JOG_INCREMENT = 2
 
-def set_mode(parent, mode):
+def set_mode(parent, mode=None):
+	if mode is None:
+		if parent.sender().objectName() == 'manual_mode_pb':
+			mode = emc.MODE_MANUAL
 	if parent.status.task_mode != mode:
 		parent.command.mode(mode)
+		parent.command.wait_complete()
+
+def set_mode_manual(parent):
+	if parent.status.task_mode != emc.MODE_MANUAL:
+		parent.command.mode(emc.MODE_MANUAL)
 		parent.command.wait_complete()
 
 def set_motion_teleop(parent, value):
@@ -192,10 +200,13 @@ def jog(parent):
 		parent.command.jog(JOG_STOP, jjogmode, joint)
 
 def run_mdi(parent, cmd=None):
-	if cmd == None:
+	print(cmd)
+	if cmd is False:
 		mdi_command = parent.mdi_command_le.text()
+		print(mdi_command)
 	else:
 		mdi_command = cmd
+	
 	if mdi_command:
 		if parent.status.task_state == emc.STATE_ON:
 			if parent.status.task_mode != emc.MODE_MDI:

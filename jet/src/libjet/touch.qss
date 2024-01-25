@@ -34,3 +34,15 @@ QToolButton { /* all types of tool button */
 	border-radius: 10px;
 }
 
+QAbstractSpinBox {
+	min-height: 50px;
+}
+
+QAbstractSpinBox::up-button {
+	min-width: 30px;
+}
+
+QAbstractSpinBox::down-button {
+	min-width: 30px;
+}
+

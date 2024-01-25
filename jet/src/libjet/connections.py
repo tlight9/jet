@@ -13,6 +13,7 @@ def connect(parent):
 	controls = {'estop_pb': 'estop_toggle',
 	'power_pb': 'power_toggle',
 	'run_pb': 'run',
+	'manual_mode_pb':'set_mode_manual',
 	'step_pb': 'step',
 	'pause_pb': 'pause',
 	'resume_pb': 'resume',
