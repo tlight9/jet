@@ -26,6 +26,10 @@ QTabBar::tab {
 	padding: 0px;
 }
 
+QTabBar::tab:selected {
+  background: lightgray;
+}
+
 QToolButton { /* all types of tool button */
 	background-color: rgba(230, 230, 230, 50%);
 	min-width: 75px;
