@@ -61,7 +61,10 @@ class number_pad(QDialog):
 		self.numbers_lb.setText(f'-{txt}')
 
 	def retval(self):
-		return(float(self.numbers_lb.text()))
+		try:
+			return(float(self.numbers_lb.text()))
+		except:
+			return False
 
 class jet_gui(QMainWindow):
 	def __init__(self):
@@ -210,9 +213,10 @@ class jet_gui(QMainWindow):
 		stylesheet = os.path.join(self.lib_path, 'touch.qss')
 		with open(stylesheet,'r') as fh:
 			np.setStyleSheet(fh.read())
-		retval = np.exec()
-		if retval:
-			self.touchoff_dsb.setValue(np.retval())
+		result = np.exec()
+		if result:
+			if np.retval():
+				self.touchoff_dsb.setValue(np.retval())
 
 	def eventFilter(self, obj, event):
 		if obj is self.gcode_pte.viewport() and event.type() == QEvent.Type.MouseButtonRelease:
