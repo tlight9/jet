@@ -162,6 +162,7 @@ class jet_gui(QMainWindow):
 		size = self.inifile.find('DISPLAY', 'SIZE') or False
 
 		connections.connect(self)
+		startup.setup_plot(self)
 		startup.setup_jog(self)
 		startup.set_labels(self)
 		startup.set_buttons(self)
@@ -215,7 +216,8 @@ class jet_gui(QMainWindow):
 			np.setStyleSheet(fh.read())
 		result = np.exec()
 		if result:
-			if np.retval():
+			print(np.retval())
+			if np.retval() is not False:
 				self.touchoff_dsb.setValue(np.retval())
 
 	def eventFilter(self, obj, event):
