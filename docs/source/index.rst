@@ -1,4 +1,4 @@
-EMC GUI
+JET GUI
 =======
 
 .. toctree::
@@ -6,6 +6,7 @@ EMC GUI
    :caption: Contents:
 
    install
+   test
    ini
    setup
    menu

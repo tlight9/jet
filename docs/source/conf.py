@@ -6,8 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'EMC GUI'
-copyright = '2023, John Thornton'
+project = 'JET GUI'
+copyright = '2024, John Thornton'
 author = 'John Thornton'
 
 # -- General configuration ---------------------------------------------------
