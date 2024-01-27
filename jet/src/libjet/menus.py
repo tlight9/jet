@@ -25,6 +25,9 @@ def file_open(parent):
 		parent.file_lb.setText(f'G code: {base}')
 
 def file_reload(parent):
+	if parent.status.task_mode != emc.MODE_MANUAL:
+		parent.command.mode(emc.MODE_MANUAL)
+		parent.command.wait_complete()
 	gcode_file = parent.status.file 
 	# Force a sync of the interpreter, which writes out the var file.
 	parent.command.task_plan_synch()
