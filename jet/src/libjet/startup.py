@@ -3,13 +3,20 @@ import os
 from functools import partial
 
 from PyQt6.QtWidgets import QLabel, QComboBox, QPlainTextEdit, QListWidget
-from PyQt6.QtWidgets import QSlider, QWidget
+from PyQt6.QtWidgets import QSlider, QWidget, QVBoxLayout
 from PyQt6.QtGui import QTextCursor
+from PyQt6.QtOpenGLWidgets import QOpenGLWidget
 
 import linuxcnc
 
 from libjet import commands
 from libjet import editor
+
+def setup_plot(parent):
+	if parent.findChild(QWidget, 'plot_widget'):
+		parent.plot = QOpenGLWidget()
+		layout = QVBoxLayout(parent.plot_widget)
+		layout.addWidget(parent.plot)
 
 def setup_jog(parent):
 	if parent.findChild(QSlider, 'jog_vel_s'):
@@ -33,7 +40,6 @@ def setup_jog(parent):
 			parent.min_jog_vel_lb.setText(f'{parent.jog_vel_s.minimum()}')
 		if parent.findChild(QLabel, 'max_jog_vel_lb'):
 			parent.max_jog_vel_lb.setText(f'{parent.jog_vel_s.maximum() / 10:.2f}')
-
 
 def set_labels(parent):
 	label_list = ['status_lb', 'file_lb',
