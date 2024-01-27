@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QFileDialog
 from PyQt5 import Qt
 app = Qt.QApplication([])
 
+import linuxcnc as emc
+
 from libjet import editor
 
 def file_open(parent):
