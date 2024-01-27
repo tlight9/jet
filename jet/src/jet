@@ -211,8 +211,8 @@ class jet_gui(QMainWindow):
 		with open(stylesheet,'r') as fh:
 			np.setStyleSheet(fh.read())
 		retval = np.exec()
-		#print(np.retval())
-		self.touchoff_dsb.setValue(np.retval())
+		if retval:
+			self.touchoff_dsb.setValue(np.retval())
 
 	def eventFilter(self, obj, event):
 		if obj is self.gcode_pte.viewport() and event.type() == QEvent.Type.MouseButtonRelease:
