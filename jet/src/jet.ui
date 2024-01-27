@@ -566,6 +566,13 @@
              </property>
             </widget>
            </item>
+           <item row="4" column="0">
+            <widget class="QPushButton" name="numberpad_pb">
+             <property name="text">
+              <string>Number Pad</string>
+             </property>
+            </widget>
+           </item>
            <item row="2" column="0">
             <widget class="QPushButton" name="z_touchoff_pb">
              <property name="text">

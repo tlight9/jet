@@ -2,8 +2,8 @@
 
 import sys, os, subprocess
 
-from PyQt6.QtWidgets import QApplication, QMainWindow
-from PyQt6 import uic
+from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog
+from PyQt6.uic import loadUi
 from PyQt6.QtCore import Qt, QTimer, QEvent
 
 # disable cache usage must be before any local imports
@@ -19,6 +19,37 @@ from libjet import editor
 
 BUILD_DATE = '1/24/24'
 VERSION = '0.1.0'
+
+class number_pad(QDialog):
+	def __init__(self):
+		super().__init__()
+		loadUi('numbers.ui', self)
+		self.buttonBox.accepted.connect(self.accept)
+		self.buttonBox.rejected.connect(self.reject)
+		self.clear_pb.clicked.connect(self.clear)
+		self.dot_pb.clicked.connect(self.dot)
+		self.dash_pb.clicked.connect(self.dash)
+		for i in range(10):
+			getattr(self, f'num_pb_{i}').clicked.connect(self.post)
+
+	def post(self):
+		#print(self.sender().objectName()[-1])
+		txt = self.numbers_lb.text()
+		self.numbers_lb.setText(f'{txt}{self.sender().objectName()[-1]}')
+
+	def clear(self):
+		self.numbers_lb.clear()
+
+	def dot(self):
+		txt = self.numbers_lb.text()
+		self.numbers_lb.setText(f'{txt}.')
+
+	def dash(self):
+		txt = self.numbers_lb.text()
+		self.numbers_lb.setText(f'-{txt}')
+
+	def retval(self):
+		return(float(self.numbers_lb.text()))
 
 class jet_gui(QMainWindow):
 	def __init__(self):
@@ -91,7 +122,7 @@ class jet_gui(QMainWindow):
 		else: # no gui specified
 			gui_path = os.path.join(self.gui_path, 'jet.ui')
 
-		uic.loadUi(gui_path, self)
+		loadUi(gui_path, self)
 
 		# find and load the stylesheet
 		stylesheet = None
@@ -150,7 +181,6 @@ class jet_gui(QMainWindow):
 		else:
 			return False
 
-
 	def update_status(self):
 		self.status.poll()
 		status.update(self)
@@ -162,6 +192,15 @@ class jet_gui(QMainWindow):
 			Qt.KeyboardModifier.ControlModifier) and event.key() == Qt.Key.Key_X:
 			self.close()
 
+	def number_pad(self, x, y):
+		#print(x, y)
+		np = number_pad()
+		stylesheet = os.path.join(self.lib_path, 'touch.qss')
+		with open(stylesheet,'r') as fh:
+			np.setStyleSheet(fh.read())
+		retval = np.exec()
+		#print(np.retval())
+		self.touchoff_dsb.setValue(np.retval())
 
 	def eventFilter(self, obj, event):
 		if obj is self.gcode_pte.viewport() and event.type() == QEvent.Type.MouseButtonRelease:

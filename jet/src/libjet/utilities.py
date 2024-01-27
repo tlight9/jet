@@ -10,3 +10,6 @@ def jog_slider(parent):
 
 def clear_mdi_history(parent):
 	print('clear mdi')
+
+
+

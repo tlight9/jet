@@ -58,6 +58,12 @@ def connect(parent):
 			getattr(parent, pb).pressed.connect(partial(getattr(commands, jog_buttons[pb]), parent))
 			getattr(parent, pb).released.connect(partial(getattr(commands, jog_buttons[pb]), parent))
 
+	special_buttons = {'numberpad_pb': 'number_pad'}
+	for pb in pushbuttons:
+		if pb in special_buttons:
+			getattr(parent, pb).clicked.connect(partial(getattr(parent, special_buttons[pb]), parent))
+
+
 	if 'exit_pb' in pushbuttons:
 		#parent.exit_pb.setVisible(False)
 		parent.exit_pb.setFlat(True)
@@ -96,6 +102,8 @@ def connect(parent):
 	for item in slider_list:
 		if item in sliders:
 			getattr(parent, item).valueChanged.connect(partial(getattr(utilities, sliders[item]), parent))
+
+	line_edit_list = {'touchoff_le': ''}
 
 	utility_list = {'clear_mdi_history_pb': 'clear_mdi_history'}
 
