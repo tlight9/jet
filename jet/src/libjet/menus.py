@@ -33,6 +33,8 @@ def file_reload(parent):
 	if parent.start_line_lb_exists:
 		parent.start_line_lb.setText('')
 	editor.clear_highlight(parent)
+	text = open(gcode_file).read()
+	parent.gcode_pte.setPlainText(text)
 
 def app_close(parent):
 	parent.close()
