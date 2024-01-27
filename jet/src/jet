@@ -23,7 +23,19 @@ VERSION = '0.1.0'
 class number_pad(QDialog):
 	def __init__(self):
 		super().__init__()
-		loadUi('numbers.ui', self)
+		
+		self.path = os.path.dirname(os.path.realpath(sys.argv[0]))
+
+		# set the library path
+		if self.path == '/usr/bin':
+			self.lib_path = '/usr/lib/libjet'
+			self.gui_path = '/usr/lib/libjet'
+		else:
+			self.lib_path = os.path.join(self.path, 'libjet')
+			self.gui_path = self.path
+
+		num_ui_path = os.path.join(self.gui_path, 'numbers.ui')
+		loadUi(num_ui_path, self)
 		self.buttonBox.accepted.connect(self.accept)
 		self.buttonBox.rejected.connect(self.reject)
 		self.clear_pb.clicked.connect(self.clear)
