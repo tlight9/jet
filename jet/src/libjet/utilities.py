@@ -9,7 +9,7 @@ def jog_slider(parent):
 		parent.jog_vel_lb.setText(f'{parent.jog_vel_s.value() / 10:.2f}')
 
 def clear_mdi_history(parent):
-	print('clear mdi')
+	parent.mdi_history_lw.clear()
 
 
 

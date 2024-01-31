@@ -107,6 +107,10 @@ def connect(parent):
 
 	utility_list = {'clear_mdi_history_pb': 'clear_mdi_history'}
 
+	for item in utility_list:
+		if item in pushbuttons:
+			getattr(parent, item).clicked.connect(partial(getattr(utilities, utility_list[item]), parent))
+
 	# combo boxes
 	combo_dict = {'jog_mode_cb': 'load_jog_modes'}
 
