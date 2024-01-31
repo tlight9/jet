@@ -209,16 +209,20 @@ class jet_gui(QMainWindow):
 			self.close()
 
 	def number_pad(self, x, y):
-		#print(x, y)
+		target = self.sender().property('target')
+		number_type = self.sender().property('type')
 		np = number_pad()
 		stylesheet = os.path.join(self.lib_path, 'touch.qss')
 		with open(stylesheet,'r') as fh:
 			np.setStyleSheet(fh.read())
 		result = np.exec()
 		if result:
-			print(np.retval())
-			if np.retval() is not False:
-				self.touchoff_dsb.setValue(np.retval())
+			if number_type == 'int':
+				value = int(np.retval())
+				print('here')
+			else:
+				value = np.retval()
+			getattr(self, f'{target}').setValue(value)
 
 	def eventFilter(self, obj, event):
 		if obj is self.gcode_pte.viewport() and event.type() == QEvent.Type.MouseButtonRelease:

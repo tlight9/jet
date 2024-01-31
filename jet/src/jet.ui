@@ -564,12 +564,21 @@
              <property name="stepType">
               <enum>QAbstractSpinBox::DefaultStepType</enum>
              </property>
+             <property name="target" stdset="0">
+              <string>touchoff_dsb</string>
+             </property>
             </widget>
            </item>
            <item row="4" column="0">
-            <widget class="QPushButton" name="numberpad_pb">
+            <widget class="QPushButton" name="numberpad_pb_0">
              <property name="text">
               <string>Number Pad</string>
+             </property>
+             <property name="target" stdset="0">
+              <string>touchoff_dsb</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>float</string>
              </property>
             </widget>
            </item>
@@ -692,6 +701,13 @@
              </property>
             </widget>
            </item>
+           <item row="3" column="0" colspan="2">
+            <widget class="QSpinBox" name="spindle_speed_sb">
+             <property name="maximum">
+              <number>30000</number>
+             </property>
+            </widget>
+           </item>
            <item row="2" column="0">
             <widget class="QPushButton" name="spindle_plus_pb">
              <property name="text">
@@ -699,10 +715,16 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="0" colspan="2">
-            <widget class="QSpinBox" name="spindle_speed_sb">
-             <property name="maximum">
-              <number>6000</number>
+           <item row="4" column="0" colspan="2">
+            <widget class="QPushButton" name="numberpad_pb_1">
+             <property name="text">
+              <string>Number Pad</string>
+             </property>
+             <property name="target" stdset="0">
+              <string>spindle_speed_sb</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>int</string>
              </property>
             </widget>
            </item>

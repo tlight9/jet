@@ -58,7 +58,10 @@ def connect(parent):
 			getattr(parent, pb).pressed.connect(partial(getattr(commands, jog_buttons[pb]), parent))
 			getattr(parent, pb).released.connect(partial(getattr(commands, jog_buttons[pb]), parent))
 
-	special_buttons = {'numberpad_pb': 'number_pad'}
+	special_buttons = {
+	'numberpad_pb_0': 'number_pad',
+	'numberpad_pb_1': 'number_pad',
+	}
 	for pb in pushbuttons:
 		if pb in special_buttons:
 			getattr(parent, pb).clicked.connect(partial(getattr(parent, special_buttons[pb]), parent))
