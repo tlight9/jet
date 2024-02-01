@@ -36,10 +36,10 @@ class gcode_pad(QDialog):
 			getattr(self, f'{item}').clicked.connect(self.post)
 
 	def next(self):
-		self.letters_sw.setCurrentIndex(1)
+		self.letters_sw.setCurrentIndex(self.letters_sw.currentIndex() + 1)
 
 	def back(self):
-		self.letters_sw.setCurrentIndex(0)
+		self.letters_sw.setCurrentIndex(self.letters_sw.currentIndex() - 1)
 
 	def post(self):
 		txt = self.gcode_lb.text()

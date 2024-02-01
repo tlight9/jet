@@ -284,7 +284,7 @@ Mode</string>
     <item row="3" column="0" colspan="4">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="gcode_tab">
        <attribute name="title">
