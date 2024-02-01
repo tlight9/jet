@@ -200,13 +200,11 @@ def jog(parent):
 		parent.command.jog(JOG_STOP, jjogmode, joint)
 
 def run_mdi(parent, cmd=None):
-	print(cmd)
-	if cmd is False:
+	if cmd is None:
 		mdi_command = parent.mdi_command_le.text()
-		print(mdi_command)
 	else:
 		mdi_command = cmd
-	
+
 	if mdi_command:
 		if parent.status.task_state == emc.STATE_ON:
 			if parent.status.task_mode != emc.MODE_MDI:
@@ -229,6 +227,8 @@ def run_mdi(parent, cmd=None):
 						mdi_codes.append(parent.mdi_history_lw.item(index).text())
 					with open(mdi_file, 'w') as f:
 						f.write('\n'.join(mdi_codes))
+				parent.command.mode(emc.MODE_MANUAL)
+				parent.command.wait_complete()
 	else:
 		print('no mdi')
 
