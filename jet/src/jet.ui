@@ -20,6 +20,9 @@
       <property name="text">
        <string>TextLabel</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
     <item row="2" column="3">
@@ -30,12 +33,16 @@
       <property name="text">
        <string>TextLabel</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
     <item row="2" column="2">
      <widget class="QPushButton" name="manual_mode_pb">
       <property name="text">
-       <string>Manual</string>
+       <string>Manual
+Mode</string>
       </property>
      </widget>
     </item>
@@ -277,7 +284,7 @@
     <item row="3" column="0" colspan="4">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="gcode_tab">
        <attribute name="title">
@@ -738,11 +745,12 @@
         <string>MDI</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_9">
-        <item row="0" column="0" colspan="2">
-         <widget class="QListWidget" name="mdi_history_lw"/>
-        </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QLineEdit" name="mdi_command_le"/>
+        <item row="2" column="1">
+         <widget class="QPushButton" name="gcode_pad_pb">
+          <property name="text">
+           <string>G code Pad</string>
+          </property>
+         </widget>
         </item>
         <item row="2" column="0">
          <widget class="QPushButton" name="run_mdi_pb">
@@ -754,7 +762,13 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="1" column="0" colspan="4">
+         <widget class="QLineEdit" name="mdi_command_le"/>
+        </item>
+        <item row="0" column="0" colspan="4">
+         <widget class="QListWidget" name="mdi_history_lw"/>
+        </item>
+        <item row="2" column="2">
          <widget class="QPushButton" name="clear_mdi_history_pb">
           <property name="text">
            <string>Clear History</string>

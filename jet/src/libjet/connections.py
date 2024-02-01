@@ -62,10 +62,11 @@ def connect(parent):
 	special_buttons = {
 	'numberpad_pb_0': 'number_pad',
 	'numberpad_pb_1': 'number_pad',
+	'gcode_pad_pb': 'gcode_pad',
 	}
 	for pb in pushbuttons:
 		if pb in special_buttons:
-			getattr(parent, pb).clicked.connect(partial(getattr(parent, special_buttons[pb]), parent))
+			getattr(parent, pb).clicked.connect(getattr(parent, special_buttons[pb]))
 
 	if 'exit_pb' in pushbuttons:
 		#parent.exit_pb.setVisible(False)
