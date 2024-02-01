@@ -1,0 +1,52 @@
+# import partial
+from functools import partial
+
+# import the QPushButton
+from PyQt6.QtWidgets import QPushButton
+
+# import the commands file so it's avaliable to use
+from libjet import commands
+
+# when I call connect from jet I pass self and it becomes parent or any other
+# name except self
+def connect(parent):
+
+	# a dictionary is created with {}
+	# dict_name = {key: value}
+	controls = {'estop_pb': 'estop_toggle',
+	'power_pb': 'power_toggle',
+	'run_pb': 'run',
+	}
+
+	# search to find all the QPushButton objects with findChildren
+	# create an empty list with []
+	pushbuttons = []
+
+	# find all the QPushButton widgets
+	children = parent.findChildren(QPushButton)
+
+	# add each QPushButton by name to the pushbuttons list
+	for child in children:
+		pushbuttons.append(child.objectName())
+
+	# loop through all the pushbuttons found and see if there is a match in controls
+	for pb in pushbuttons:
+		# if there is a match then make the connection between the pushbutton clicked
+		# signal and the function
+		if pb in controls:
+			getattr(parent, pb).clicked.connect(partial(getattr(commands, controls[pb]), parent))
+			# getattr(parent, pb) returns the pushbutton object name so the same as
+			# parent.estop_pb
+			# .clicked is a signal from a pushbutton
+			# .connect connects that signale to a function
+			# partial() allows me to pass parent to that function
+			# getattr(commands, controls[pb]) returns commands.estop_toggle
+			# controls[pb] gets the value from the dictionary for pb
+			# same as controls['estop_pb'] but from the list
+
+	# getattr(object, name)
+	'''
+	Return the value of the named attribute of object. name must be a string.
+	If the string is the name of one of the object’s attributes, the result is the
+	value of that attribute.
+	'''
