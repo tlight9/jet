@@ -199,11 +199,11 @@ def jog(parent):
 	else:
 		parent.command.jog(JOG_STOP, jjogmode, joint)
 
-def run_mdi(parent, cmd=None):
-	if cmd is None:
-		mdi_command = parent.mdi_command_le.text()
-	else:
+def run_mdi(parent, cmd=''):
+	if cmd:
 		mdi_command = cmd
+	else:
+		mdi_command = parent.mdi_command_le.text()
 
 	if mdi_command:
 		if parent.status.task_state == emc.STATE_ON:
