@@ -1,6 +1,7 @@
 from functools import partial
 
 from PyQt6.QtWidgets import QPushButton, QPlainTextEdit, QListWidget, QSlider
+from PyQt6.QtWidgets import QLineEdit
 from PyQt6.QtGui import QAction
 
 from libjet import commands
@@ -66,7 +67,6 @@ def connect(parent):
 		if pb in special_buttons:
 			getattr(parent, pb).clicked.connect(partial(getattr(parent, special_buttons[pb]), parent))
 
-
 	if 'exit_pb' in pushbuttons:
 		#parent.exit_pb.setVisible(False)
 		parent.exit_pb.setFlat(True)
@@ -106,7 +106,16 @@ def connect(parent):
 		if item in sliders:
 			getattr(parent, item).valueChanged.connect(partial(getattr(utilities, sliders[item]), parent))
 
-	line_edit_list = {'touchoff_le': ''}
+	line_edit_list = []
+	for line_edit in parent.findChildren(QLineEdit):
+		if line_edit.objectName():
+			line_edit_list.append(line_edit.objectName())
+
+	line_edits = {'touchoff_le': '', 'mdi_command_le': 'run_mdi'}
+
+	for item in line_edit_list:
+		if item in line_edits:
+			getattr(parent, item).returnPressed.connect(partial(getattr(commands, line_edits[item]), parent))
 
 	utility_list = {'clear_mdi_history_pb': 'clear_mdi_history'}
 
