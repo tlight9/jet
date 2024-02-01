@@ -24,8 +24,10 @@ class gcode_pad(QDialog):
 		self.clear_pb.clicked.connect(self.clear)
 		self.dot_pb.clicked.connect(self.dot)
 		self.dash_pb.clicked.connect(self.dash)
-		self.next_pb.clicked.connect(self.next)
-		self.back_pb.clicked.connect(self.back)
+		self.next_pb_0.clicked.connect(self.next)
+		self.next_pb_1.clicked.connect(self.next)
+		self.back_pb_0.clicked.connect(self.back)
+		self.back_pb_1.clicked.connect(self.back)
 
 		char_list = []
 		for item in self.findChildren(QPushButton):
