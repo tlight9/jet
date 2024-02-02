@@ -12,6 +12,8 @@ specificed then the default GUI will be used.
 To use your ui file you created add `GUI = file-name.ui` 'f not entered then the
 default ui file will be used.
 
+To use the built in stylesheets add `INPUT = TOUCH` or `INPUT = KEYBOARD`
+
 To use your style sheet add `QSS = file-name.qss` if not entered then the default
 qss file will be used.
 
