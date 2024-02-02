@@ -62,6 +62,7 @@ def connect(parent):
 	special_buttons = {
 	'numberpad_pb_0': 'number_pad',
 	'numberpad_pb_1': 'number_pad',
+	'numberpad_pb_2': 'number_pad',
 	'gcode_pad_pb': 'gcode_pad',
 	}
 	for pb in pushbuttons:
