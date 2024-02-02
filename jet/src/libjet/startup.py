@@ -42,19 +42,21 @@ def setup_jog(parent):
 			parent.max_jog_vel_lb.setText(f'{parent.jog_vel_s.maximum() / 10:.2f}')
 
 def set_labels(parent):
+	# search for label widgets
 	label_list = ['status_lb', 'file_lb',
 	'dro_lb_x', 'dro_lb_y', 'dro_lb_z',
 	'motion_line_lb', 'start_line_lb',
 	'min_jog_vel_lb', 'max_jog_vel_lb',
 	'jog_vel_lb', 'g_codes_lb', 'm_codes_lb',
 	'g5x_offsets_lb', 'g92_offsets_lb',
-	'interp_state_lb', 'task_state_lb']
+	'interp_state_lb', 'task_state_lb',
+	'tool_lb',]
 	children = parent.findChildren(QLabel)
 	found_label_list = []
 	for child in children:
 		found_label_list.append(child.objectName())
 
-	for label in label_list:
+	for label in label_list: # set a variable for exists
 		if label in found_label_list:
 			setattr(parent, f'{label}_exists', True)
 		else:

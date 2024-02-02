@@ -14,6 +14,10 @@ def update(parent):
 	if parent.dro_lb_z_exists:
 		g5z = parent.status.g5x_offset[2]
 		parent.dro_lb_z.setText(f'{parent.status.position[2] - g5z:.4f}')
+	if parent.tool_lb_exists:
+		tool = parent.status.tool_in_spindle
+		parent.tool_lb.setText(f'Tool: {tool}')
+
 
 	task_state = {1:'STATE_ESTOP', 2:'STATE_ESTOP_RESET', 3:'STATE_ON', 4:'STATE_OFF', }
 	if parent.task_state_lb_exists:
@@ -29,7 +33,6 @@ def update(parent):
 		parent.pause_pb.setEnabled(False)
 	else:
 		parent.resume_pb.setEnabled(False)
-
 
 	state_mode = {1: 'DONE', 2: 'EXEC', 3: 'ERROR'}
 	parent.state_lb.setText(f'{state_mode[parent.status.state]}')

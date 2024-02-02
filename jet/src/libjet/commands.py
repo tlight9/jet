@@ -234,15 +234,43 @@ def run_mdi(parent, cmd=''):
 
 def touchoff(parent):
 	g5x = parent.status.g5x_index
-	axis = parent.sender().objectName()[0].upper()
+	axis = parent.sender().objectName()[-1].upper()
 	value = parent.touchoff_dsb.value()
 	mdi_command = f'G10 L20 P{g5x} {axis}{value}'
 	if parent.status.task_state == emc.STATE_ON:
 		if parent.status.task_mode != emc.MODE_MDI:
 			parent.command.mode(emc.MODE_MDI)
 			parent.command.wait_complete()
-	parent.command.mdi(mdi_command)
-	parent.command.wait_complete()
+		parent.command.mdi(mdi_command)
+		parent.command.wait_complete()
+		parent.command.mode(emc.MODE_MANUAL)
+		parent.command.wait_complete()
+
+def tool_touchoff(parent):
+	axis = parent.sender().objectName()[-1].upper()
+	cur_pos = parent.status.actual_position
+	cur_tool = parent.status.tool_in_spindle
+	offset = parent.tool_touchoff_dsb.value()
+	#print(axis)
+	#print(cur_pos)
+	#print(cur_tool)
+	#print(offset)
+	#return
+	if cur_tool > 0:
+		mdi_command = f'G10 L1 P{cur_tool} {axis}{offset}'
+		if parent.status.task_state == emc.STATE_ON:
+			if parent.status.task_mode != emc.MODE_MDI:
+				parent.command.mode(emc.MODE_MDI)
+				parent.command.wait_complete()
+			parent.command.mdi(mdi_command)
+			parent.command.wait_complete()
+			# be nice and return to manual mode so jogging works
+			parent.command.mode(emc.MODE_MANUAL)
+			parent.command.wait_complete()
+
+	else:
+		print('no tool in spindle')
+
 
 def spindle(parent):
 	pb = parent.sender().objectName()
