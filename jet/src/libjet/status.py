@@ -2,18 +2,27 @@ from PyQt6.QtGui import QTextCursor, QTextBlockFormat, QColor
 from PyQt6.QtWidgets import QTextEdit, QWidget
 
 def update(parent):
+	parent.status.poll()
 	task_mode = {1: 'MANUAL', 2: 'AUTO', 3: 'MDI'}
 	if parent.status_lb_exists:
 		parent.status_lb.setText(task_mode[parent.status.task_mode])
 	if parent.dro_lb_x_exists:
+		if parent.status.tool_in_spindle > 0:
+			t_x = parent.status.tool_offset[0]
+			t_y = parent.status.tool_offset[1]
+			t_z = parent.status.tool_offset[2]
+		else:
+			t_x = 0
+			t_y = 0
+			t_z = 0
 		g5x = parent.status.g5x_offset[0]
-		parent.dro_lb_x.setText(f'{parent.status.position[0] - g5x:.4f}')
+		parent.dro_lb_x.setText(f'{parent.status.position[0] - g5x - t_x:.4f}')
 	if parent.dro_lb_y_exists:
 		g5y = parent.status.g5x_offset[1]
-		parent.dro_lb_y.setText(f'{parent.status.position[1] - g5y:.4f}')
+		parent.dro_lb_y.setText(f'{parent.status.position[1] - g5y - t_y:.4f}')
 	if parent.dro_lb_z_exists:
 		g5z = parent.status.g5x_offset[2]
-		parent.dro_lb_z.setText(f'{parent.status.position[2] - g5z:.4f}')
+		parent.dro_lb_z.setText(f'{parent.status.position[2] - g5z - t_z:.4f}')
 	if parent.tool_lb_exists:
 		tool = parent.status.tool_in_spindle
 		parent.tool_lb.setText(f'Tool: {tool}')
