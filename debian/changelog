@@ -1,3 +1,9 @@
+jet (0.2.0) unstable; urgency=medium
+
+  * Add touch screen input pads
+
+ -- John Thornton <dev@gnipsel.com>  Fri, 02 Feb 2024 05:07:42 -0600
+
 jet (0.1.0) unstable; urgency=medium
 
   * Initial release.
