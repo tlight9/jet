@@ -56,7 +56,7 @@ class gcode_pad(QDialog):
 
 	def dash(self):
 		txt = self.gcode_lb.text()
-		self.gcode_lb.setText(f'-{txt}')
+		self.gcode_lb.setText(f'{txt}-')
 
 	def retval(self):
 		try:
