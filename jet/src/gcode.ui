@@ -248,6 +248,13 @@
      </widget>
      <widget class="QWidget" name="page_3">
       <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="char_P">
+         <property name="text">
+          <string>P</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="back_pb_1">
          <property name="text">
@@ -255,7 +262,14 @@
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
+       <item row="0" column="1">
+        <widget class="QPushButton" name="char_L">
+         <property name="text">
+          <string>L</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
         <spacer name="horizontalSpacer">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -267,13 +281,6 @@
           </size>
          </property>
         </spacer>
-       </item>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="char_P">
-         <property name="text">
-          <string>P</string>
-         </property>
-        </widget>
        </item>
       </layout>
      </widget>
