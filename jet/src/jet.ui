@@ -432,14 +432,14 @@ Mode</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_12">
            <item row="1" column="0">
-            <widget class="QPushButton" name="y_touchoff_pb">
+            <widget class="QPushButton" name="touchoff_pb_y">
              <property name="text">
               <string>Touch Off Y</string>
              </property>
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QPushButton" name="x_touchoff_pb">
+            <widget class="QPushButton" name="touchoff_pb_x">
              <property name="text">
               <string>Touch Off X</string>
              </property>
@@ -478,7 +478,7 @@ Mode</string>
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QPushButton" name="z_touchoff_pb">
+            <widget class="QPushButton" name="touchoff_pb_z">
              <property name="text">
               <string>Touch Off Z</string>
              </property>
@@ -585,7 +585,7 @@ Mode</string>
         <string>Manual</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_8">
-        <item row="0" column="1">
+        <item row="0" column="2">
          <widget class="QFrame" name="frame_6">
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
@@ -803,6 +803,19 @@ Mode</string>
            </item>
           </layout>
          </widget>
+        </item>
+        <item row="0" column="1">
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
