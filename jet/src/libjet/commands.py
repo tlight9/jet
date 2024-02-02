@@ -257,7 +257,7 @@ def tool_touchoff(parent):
 	#print(offset)
 	#return
 	if cur_tool > 0:
-		mdi_command = f'G10 L1 P{cur_tool} {axis}{offset}'
+		mdi_command = f'G10 L10 P{cur_tool} {axis}{offset}'
 		if parent.status.task_state == emc.STATE_ON:
 			if parent.status.task_mode != emc.MODE_MDI:
 				parent.command.mode(emc.MODE_MDI)
