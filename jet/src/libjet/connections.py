@@ -34,6 +34,8 @@ def connect(parent):
 	'tool_touchoff_x': 'tool_touchoff',
 	'tool_touchoff_y': 'tool_touchoff',
 	'tool_touchoff_z': 'tool_touchoff',
+	'tool_change_pb':  'tool_change',
+	'tool_number_dsb': 'tool_change',
 	'start_spindle_pb': 'spindle',
 	'stop_spindle_pb': 'spindle',
 	'spindle_plus_pb': 'spindle',
