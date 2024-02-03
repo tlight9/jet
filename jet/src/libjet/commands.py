@@ -271,7 +271,25 @@ def tool_touchoff(parent):
 	else:
 		print('no tool in spindle')
 
-
+def tool_change(parent):
+	axis = parent.sender().objectName()[-1].upper()
+	tool_num = parent.tool_number_dsb.value()
+	#print(tool_num)
+	#return
+	if tool_num > 0:
+		mdi_command = f'T{tool_num} M6'
+		if parent.status.task_state == emc.STATE_ON:
+			if parent.status.task_mode != emc.MODE_MDI:
+				parent.command.mode(emc.MODE_MDI)
+				parent.command.wait_complete()
+			parent.command.mdi(mdi_command)
+			parent.command.wait_complete()
+			# be nice and return to manual mode so jogging works
+			parent.command.mode(emc.MODE_MANUAL)
+			parent.command.wait_complete()
+	else:
+		print('No tool selected')
+		
 def spindle(parent):
 	pb = parent.sender().objectName()
 	if pb == 'start_spindle_pb':
