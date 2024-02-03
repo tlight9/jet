@@ -41,6 +41,7 @@ def connect(parent):
 	'spindle_plus_pb': 'spindle',
 	'spindle_minus_pb': 'spindle',
 	}
+
 	pushbuttons = []
 	children = parent.findChildren(QPushButton)
 	for child in children:
