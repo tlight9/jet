@@ -44,7 +44,6 @@ def setup_jog(parent):
 		parent.status.poll()
 		jog_min = parent.inifile.find('DISPLAY', 'MIN_LINEAR_VELOCITY') or False
 		jog_default = parent.inifile.find('DISPLAY', 'DEFAULT_LINEAR_VELOCITY') or False
-		print(jog_default)
 		jog_max = parent.inifile.find('DISPLAY', 'MAX_LINEAR_VELOCITY') or False
 		if jog_min:
 			jog_min = int(float(jog_min))
@@ -56,7 +55,6 @@ def setup_jog(parent):
 			parent.jog_vel_s.setMaximum(jog_max)
 		if jog_default:
 			jog_default = int(float(jog_default) * 60)
-			print(jog_default)
 			parent.jog_vel_s.setValue(jog_default)
 		if parent.min_jog_vel_lb_exists:
 			parent.min_jog_vel_lb.setText(f'{parent.jog_vel_s.minimum()}')
