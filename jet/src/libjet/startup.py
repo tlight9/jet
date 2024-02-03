@@ -18,29 +18,6 @@ def setup_plot(parent):
 		layout = QVBoxLayout(parent.plot_widget)
 		layout.addWidget(parent.plot)
 
-def setup_jog(parent):
-	if parent.findChild(QSlider, 'jog_vel_s'):
-		parent.status.poll()
-		jog_min = parent.inifile.find('DISPLAY', 'MIN_LINEAR_VELOCITY') or False
-		jog_default = parent.inifile.find('DISPLAY', 'DEFAULT_LINEAR_VELOCITY') or False
-		jog_max = parent.inifile.find('DISPLAY', 'MAX_LINEAR_VELOCITY') or False
-		#jog_min = int(float(parent.inifile.find('DISPLAY', 'MIN_LINEAR_VELOCITY')) * 10) or False
-		#print(f'min: {jog_min}')
-		if jog_min:
-			jog_min = int(float(jog_min))
-		else:
-			jog_min = 0
-		parent.jog_vel_s.setMinimum(jog_min)
-		if jog_max:
-			parent.jog_vel_s.setMaximum(int(float(jog_max)))
-		if jog_default:
-			parent.jog_vel_s.setValue(int(float(jog_default)))
-
-		if parent.findChild(QLabel, 'min_jog_vel_lb'):
-			parent.min_jog_vel_lb.setText(f'{parent.jog_vel_s.minimum()}')
-		if parent.findChild(QLabel, 'max_jog_vel_lb'):
-			parent.max_jog_vel_lb.setText(f'{parent.jog_vel_s.maximum() / 10:.2f}')
-
 def set_labels(parent):
 	# search for label widgets
 	label_list = ['status_lb', 'file_lb',
@@ -50,7 +27,7 @@ def set_labels(parent):
 	'jog_vel_lb', 'g_codes_lb', 'm_codes_lb',
 	'g5x_offsets_lb', 'g92_offsets_lb',
 	'interp_state_lb', 'task_state_lb',
-	'tool_lb',]
+	'tool_lb', 'jog_units_lb']
 	children = parent.findChildren(QLabel)
 	found_label_list = []
 	for child in children:
@@ -61,6 +38,36 @@ def set_labels(parent):
 			setattr(parent, f'{label}_exists', True)
 		else:
 			setattr(parent, f'{label}_exists', False)
+
+def setup_jog(parent):
+	if parent.findChild(QSlider, 'jog_vel_s'):
+		parent.status.poll()
+		jog_min = parent.inifile.find('DISPLAY', 'MIN_LINEAR_VELOCITY') or False
+		jog_default = parent.inifile.find('DISPLAY', 'DEFAULT_LINEAR_VELOCITY') or False
+		print(jog_default)
+		jog_max = parent.inifile.find('DISPLAY', 'MAX_LINEAR_VELOCITY') or False
+		if jog_min:
+			jog_min = int(float(jog_min))
+		else:
+			jog_min = 0
+		parent.jog_vel_s.setMinimum(jog_min)
+		if jog_max:
+			jog_max = int(float(jog_max) * 60)
+			parent.jog_vel_s.setMaximum(jog_max)
+		if jog_default:
+			jog_default = int(float(jog_default) * 60)
+			print(jog_default)
+			parent.jog_vel_s.setValue(jog_default)
+		if parent.min_jog_vel_lb_exists:
+			parent.min_jog_vel_lb.setText(f'{parent.jog_vel_s.minimum()}')
+		if parent.max_jog_vel_lb_exists:
+			parent.max_jog_vel_lb.setText(f'{parent.jog_vel_s.maximum():.1f}')
+		if parent.jog_units_lb_exists:
+			linear_units = parent.inifile.find('TRAJ', 'LINEAR_UNITS') or False
+			if linear_units == 'inch':
+				parent.jog_units_lb.setText('in/min')
+			else:
+				parent.jog_units_lb.setText('mm/min')
 
 def load_combos(parent):
 	combo_list = ['jog_modes_cb']

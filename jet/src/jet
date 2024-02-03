@@ -120,10 +120,10 @@ class jet_gui(QMainWindow):
 		size = self.inifile.find('DISPLAY', 'SIZE') or False
 
 		connections.connect(self)
-		startup.setup_plot(self)
-		startup.setup_jog(self)
 		startup.set_labels(self)
 		startup.set_buttons(self)
+		startup.setup_plot(self)
+		startup.setup_jog(self)
 		startup.load_combos(self)
 		startup.get_list_widgets(self)
 		startup.get_pte(self)

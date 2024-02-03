@@ -754,16 +754,6 @@ Mode</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QSlider" name="jog_vel_s">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="tickPosition">
-              <enum>QSlider::TicksBelow</enum>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="min_jog_vel_lb">
              <property name="text">
@@ -798,6 +788,26 @@ Mode</string>
             <widget class="QLabel" name="jog_vel_lb">
              <property name="text">
               <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QSlider" name="jog_vel_s">
+             <property name="maximum">
+              <number>1000</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="tickPosition">
+              <enum>QSlider::NoTicks</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QLabel" name="jog_units_lb">
+             <property name="text">
+              <string/>
              </property>
             </widget>
            </item>
