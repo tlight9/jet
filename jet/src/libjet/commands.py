@@ -289,7 +289,7 @@ def tool_change(parent):
 			parent.command.wait_complete()
 	else:
 		print('No tool selected')
-		
+
 def spindle(parent):
 	pb = parent.sender().objectName()
 	if pb == 'start_spindle_pb':
@@ -300,7 +300,3 @@ def spindle(parent):
 		parent.spindle_speed_sb.setValue(parent.spindle_speed_sb.value() + 100) 
 	elif pb == 'spindle_minus_pb':
 		parent.spindle_speed_sb.setValue(parent.spindle_speed_sb.value() - 100) 
-
-
-
-
