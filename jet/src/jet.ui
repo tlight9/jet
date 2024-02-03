@@ -490,7 +490,7 @@ Mode</string>
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox_6">
           <property name="title">
-           <string>Tool Touc h Off</string>
+           <string>Tool Touch Off</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
