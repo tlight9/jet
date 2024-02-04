@@ -40,13 +40,6 @@ def update(parent):
 		parent.power_pb.setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
 		parent.power_pb.setText('Power On')
 
-		#parent.estop_pb.setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
-
-		#parent.estop_pb.setStyleSheet('background-color: rgba(255, 0, 0, 25%);')
-		#parent.power_pb.setStyleSheet('background-color: ;')
-		#parent.power_pb.setText('Power Off')
-
-
 	task_state = {1:'STATE_ESTOP', 2:'STATE_ESTOP_RESET', 3:'STATE_OFF', 4:'STATE_ON', }
 	if parent.task_state_lb_exists:
 		parent.task_state_lb.setText(f'{task_state[parent.status.task_state]}')
