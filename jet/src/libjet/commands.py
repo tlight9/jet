@@ -37,20 +37,12 @@ def set_motion_teleop(parent, value):
 def estop_toggle(parent):
 	if parent.status.task_state == emc.STATE_ESTOP:
 		parent.command.state(emc.STATE_ESTOP_RESET)
-		parent.estop_pb.setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
-		parent.power_pb.setEnabled(True)
 	else:
 		parent.command.state(emc.STATE_ESTOP)
-		parent.estop_pb.setStyleSheet('background-color: rgba(255, 0, 0, 25%);')
-		parent.power_pb.setEnabled(False)
-		parent.power_pb.setStyleSheet('background-color: ;')
-		parent.power_pb.setText('Power Off')
 
 def power_toggle(parent):
 	if parent.status.task_state == emc.STATE_ESTOP_RESET:
 		parent.command.state(emc.STATE_ON)
-		parent.power_pb.setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
-		parent.power_pb.setText('Power On')
 		if parent.status.file:
 			parent.run_pb.setEnabled(True)
 			parent.step_pb.setEnabled(True)
@@ -62,8 +54,6 @@ def power_toggle(parent):
 		parent.start_spindle_pb.setEnabled(True)
 	else:
 		parent.command.state(emc.STATE_OFF)
-		parent.power_pb.setStyleSheet('background-color: ;')
-		parent.power_pb.setText('Power Off')
 		parent.home_all_pb.setEnabled(False)
 		parent.run_mdi_pb.setEnabled(False)
 		for i in range(parent.joints):

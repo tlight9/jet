@@ -27,8 +27,27 @@ def update(parent):
 		tool = parent.status.tool_in_spindle
 		parent.tool_lb.setText(f'Tool: {tool}')
 
+	task_state = parent.status.task_state
+	if task_state == parent.emc.STATE_ESTOP:
+		parent.estop_pb.setStyleSheet('background-color: rgba(255, 0, 0, 25%);')
+		parent.power_pb.setEnabled(False)
+	elif task_state == parent.emc.STATE_ESTOP_RESET:
+		parent.estop_pb.setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
+		parent.power_pb.setEnabled(True)
+		parent.power_pb.setStyleSheet('background-color: ;')
+		parent.power_pb.setText('Power Off')
+	elif task_state == parent.emc.STATE_ON:
+		parent.power_pb.setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
+		parent.power_pb.setText('Power On')
 
-	task_state = {1:'STATE_ESTOP', 2:'STATE_ESTOP_RESET', 3:'STATE_ON', 4:'STATE_OFF', }
+		#parent.estop_pb.setStyleSheet('background-color: rgba(0, 255, 0, 25%);')
+
+		#parent.estop_pb.setStyleSheet('background-color: rgba(255, 0, 0, 25%);')
+		#parent.power_pb.setStyleSheet('background-color: ;')
+		#parent.power_pb.setText('Power Off')
+
+
+	task_state = {1:'STATE_ESTOP', 2:'STATE_ESTOP_RESET', 3:'STATE_OFF', 4:'STATE_ON', }
 	if parent.task_state_lb_exists:
 		parent.task_state_lb.setText(f'{task_state[parent.status.task_state]}')
 
