@@ -241,11 +241,6 @@ def tool_touchoff(parent):
 	cur_pos = parent.status.actual_position
 	cur_tool = parent.status.tool_in_spindle
 	offset = parent.tool_touchoff_dsb.value()
-	#print(axis)
-	#print(cur_pos)
-	#print(cur_tool)
-	#print(offset)
-	#return
 	if cur_tool > 0:
 		mdi_command = f'G10 L10 P{cur_tool} {axis}{offset}'
 		if parent.status.task_state == emc.STATE_ON:
