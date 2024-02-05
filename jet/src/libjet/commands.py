@@ -272,7 +272,6 @@ def tool_change(parent):
 			# be nice and return to manual mode so jogging works
 			parent.command.mode(emc.MODE_MANUAL)
 			parent.command.wait_complete()
-			print('done')
 	else:
 		print('No tool selected')
 
