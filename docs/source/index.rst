@@ -8,7 +8,7 @@ JET GUI
    install
    test
    ini
-   setup
+   designer
    menu
    controls
    labels
