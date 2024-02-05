@@ -258,7 +258,7 @@ def tool_touchoff(parent):
 
 def tool_change(parent):
 	axis = parent.sender().objectName()[-1].upper()
-	tool_num = parent.tool_number_dsb.value()
+	tool_num = parent.tool_number_sb.value()
 	#print(tool_num)
 	#return
 	if tool_num > 0:
@@ -272,6 +272,7 @@ def tool_change(parent):
 			# be nice and return to manual mode so jogging works
 			parent.command.mode(emc.MODE_MANUAL)
 			parent.command.wait_complete()
+			print('done')
 	else:
 		print('No tool selected')
 
