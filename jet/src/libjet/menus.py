@@ -22,11 +22,9 @@ def file_open(parent):
 		text = open(gcode_file).read()
 		parent.gcode_pte.setPlainText(text)
 		parent.actionReload.setEnabled(True)
-
-
-	base = os.path.basename(gcode_file)
-	if parent.file_lb_exists:
-		parent.file_lb.setText(f'G code: {base}')
+		base = os.path.basename(gcode_file)
+		if parent.file_lb_exists:
+			parent.file_lb.setText(f'G code: {base}')
 
 def file_reload(parent):
 	parent.status.poll()
