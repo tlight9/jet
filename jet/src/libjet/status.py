@@ -58,11 +58,9 @@ def update(parent):
 	state_mode = {1: 'DONE', 2: 'EXEC', 3: 'ERROR'}
 	parent.state_lb.setText(f'{state_mode[parent.status.state]}')
 	if parent.status.state == parent.emc.RCS_EXEC:
-		parent.actionReload.setEnabled(False)
 		parent.step_pb.setEnabled(False)
 		parent.pause_pb.setEnabled(True)
-	else:
-		parent.actionReload.setEnabled(True)
+
 	if parent.status.state == parent.emc.RCS_DONE and parent.status.task_state == parent.emc.STATE_ON:
 		parent.run_pb.setEnabled(True)
 		parent.step_pb.setEnabled(True)

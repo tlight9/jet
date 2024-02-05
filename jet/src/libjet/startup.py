@@ -15,6 +15,7 @@ from libjet import editor
 def set_menu_items(parent):
 	if len(parent.status.file) > 0:
 		parent.actionReload.setEnabled(True)
+		print('here')
 
 def setup_plot(parent):
 	if parent.findChild(QWidget, 'plot_widget'):
