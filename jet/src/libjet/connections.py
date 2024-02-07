@@ -39,6 +39,8 @@ def connect(parent):
 	'stop_spindle_pb': 'spindle',
 	'spindle_plus_pb': 'spindle',
 	'spindle_minus_pb': 'spindle',
+	'coolant_flood_pb': 'flood_coolant',
+	'coolant_mist_pb': 'mist_coolant',
 	}
 
 	pushbuttons = []
