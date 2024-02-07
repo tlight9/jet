@@ -268,7 +268,7 @@ Mode</string>
     <item row="4" column="0" colspan="6">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="gcode_tab">
        <attribute name="title">
@@ -895,17 +895,43 @@ Mode</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="4">
-         <widget class="QLineEdit" name="mdi_command_le"/>
-        </item>
-        <item row="0" column="0" colspan="4">
-         <widget class="QListWidget" name="mdi_history_lw"/>
-        </item>
         <item row="2" column="2">
          <widget class="QPushButton" name="clear_mdi_history_pb">
           <property name="text">
            <string>Clear History</string>
           </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QLineEdit" name="mdi_command_le"/>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QListWidget" name="mdi_history_lw"/>
+        </item>
+        <item row="0" column="3" rowspan="3">
+         <widget class="QGroupBox" name="groupBox_8">
+          <property name="title">
+           <string>MDI Commands</string>
+          </property>
+          <widget class="QPushButton" name="pushButton">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>40</y>
+             <width>87</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>G0 X0 Y0</string>
+           </property>
+           <property name="function" stdset="0">
+            <string>mdi</string>
+           </property>
+           <property name="command" stdset="0">
+            <string>G0 X0 Y0</string>
+           </property>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -993,6 +1019,33 @@ Mode</string>
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Page</string>
+       </attribute>
+       <widget class="QPushButton" name="light">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>40</y>
+          <width>87</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Light</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="function" stdset="0">
+         <string>hal_pin</string>
+        </property>
+        <property name="pin_1" stdset="0">
+         <string>out, hal_bit, hal_out</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </item>
     <item row="3" column="1">
@@ -1066,6 +1119,7 @@ Mode</string>
      <string>Machine</string>
     </property>
     <addaction name="actionClear_MDI"/>
+    <addaction name="actionShow_HAL"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMachine"/>
@@ -1105,6 +1159,11 @@ Mode</string>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionShow_HAL">
+   <property name="text">
+    <string>Show HAL</string>
    </property>
   </action>
  </widget>

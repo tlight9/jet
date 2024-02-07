@@ -3,11 +3,12 @@ import os
 from functools import partial
 
 from PyQt6.QtWidgets import QLabel, QComboBox, QPlainTextEdit, QListWidget
-from PyQt6.QtWidgets import QSlider, QWidget, QVBoxLayout
+from PyQt6.QtWidgets import QPushButton, QSlider, QWidget, QVBoxLayout
 from PyQt6.QtGui import QTextCursor
 from PyQt6.QtOpenGLWidgets import QOpenGLWidget
 
 import linuxcnc
+import hal
 
 from libjet import commands
 from libjet import editor
@@ -128,6 +129,41 @@ def load_mdi(parent):
 				history_list = f.readlines()
 				for item in history_list:
 					parent.mdi_history_lw.addItem(item.strip())
+
+def setup_mdi(parent):
+	for button in parent.findChildren(QPushButton):
+		if button.property('function') == 'mdi':
+			#print(f'{button.objectName()} {button.property("function")}')
+			props = button.dynamicPropertyNames()
+			for prop in props:
+				prop = str(prop, 'utf-8')
+				if prop == 'command':
+					cmd = button.property(prop)
+					getattr(parent, f'{button.objectName()}').clicked.connect(partial(commands.run_mdi, parent, cmd))
+
+def setup_hal(parent):
+	for button in parent.findChildren(QPushButton):
+		if button.property('function') == 'hal_pin':
+			print(f'{button.objectName()} {button.property("function")}')
+			props = button.dynamicPropertyNames()
+			for prop in props:
+				prop = str(prop, 'utf-8')
+				if not prop.startswith('_'):
+					print(button.property(prop))
+	i = 0
+	#setattr(parent, f'c_{i}', None)
+	#setattr(parent, f'c_{i}', hal.component('buttons'))
+	#getattr(parent, f'c_{i}').newpin('out', hal.HAL_BIT, hal.HAL_OUT)
+	#getattr(parent, f'c_{i}').ready()
+	#setattr(parent, f'c_{i}', getattr(parent, f'c_{i}').newpin('out', hal.HAL_BIT, hal.HAL_OUT))
+	#setattr(parent, f'c_{i}', getattr(parent, f'c_{i}').ready())
+
+
+
+	#c = hal.component("buttons")
+	#c.newpin('out', hal.HAL_BIT, hal.HAL_OUT)
+	#c.ready()
+	#print(hal.component_exists("buttons"))
 
 def print_constants(parent):
 	print(f'MODE_MANUAL = {parent.emc.MODE_MANUAL}')

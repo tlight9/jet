@@ -25,6 +25,9 @@ VERSION = '0.1.0'
 
 
 class jet_gui(QMainWindow):
+
+	COMP = None
+
 	def __init__(self):
 		super().__init__()
 		'''
@@ -119,6 +122,8 @@ class jet_gui(QMainWindow):
 
 		size = self.inifile.find('DISPLAY', 'SIZE') or False
 
+		#self.c = None
+
 		connections.connect(self)
 		startup.set_labels(self)
 		startup.set_buttons(self)
@@ -128,6 +133,8 @@ class jet_gui(QMainWindow):
 		startup.get_list_widgets(self)
 		startup.get_pte(self)
 		startup.load_mdi(self)
+		#startup.setup_hal(self)
+		startup.setup_mdi(self)
 		#startup.print_constants(self)
 		startup.test(self)
 
@@ -135,6 +142,7 @@ class jet_gui(QMainWindow):
 		self.timer = QTimer()
 		self.timer.timeout.connect(self.update_status)
 		self.timer.start(10) # milliseconds
+
 
 		# set the inital screen size
 		if size:
