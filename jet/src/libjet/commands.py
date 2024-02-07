@@ -210,14 +210,6 @@ def run_mdi(parent, cmd=''):
 			while parent.status.state == parent.emc.RCS_EXEC:
 				parent.status.poll()
 			if parent.status.state == parent.emc.RCS_DONE:
-				print('done')
-
-			'''
-
-			parent.command.wait_complete()
-			parent.status.poll()
-			if parent.status.state != parent.emc.RCS_ERROR:
-				# add mdi to list
 				if parent.mdi_history_lw_exists:
 					parent.mdi_history_lw.addItem(mdi_command)
 				parent.mdi_command_le.setText('')
@@ -231,9 +223,6 @@ def run_mdi(parent, cmd=''):
 						f.write('\n'.join(mdi_codes))
 				parent.command.mode(emc.MODE_MANUAL)
 				parent.command.wait_complete()
-			'''
-	else:
-		print('no mdi')
 
 def touchoff(parent):
 	g5x = parent.status.g5x_index
