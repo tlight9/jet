@@ -1,4 +1,4 @@
-import os
+import os, subprocess
 
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5 import Qt
@@ -53,5 +53,6 @@ def clear_mdi(parent):
 	with open(mdi_file, 'w') as f:
 		f.write('')
 
-
+def show_hal(parent):
+	subprocess.run(['halshow'], text=True, capture_output=True)
 

@@ -80,8 +80,11 @@ def connect(parent):
 		parent.exit_pb.pressed.connect(parent.close)
 
 	# Menu Items
-	menu_actions = {'actionOpen': 'file_open', 'actionReload': 'file_reload',
-	'actionExit': 'app_close', 'actionClear_MDI': 'clear_mdi'}
+	menu_actions = {'actionOpen': 'file_open',
+	'actionReload': 'file_reload',
+	'actionExit': 'app_close',
+	'actionClear_MDI': 'clear_mdi',
+	'actionShow_HAL': 'show_hal'}
 	action_list = []
 	for action in parent.findChildren(QAction):
 		if action.objectName():
