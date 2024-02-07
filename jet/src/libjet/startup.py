@@ -144,7 +144,7 @@ def setup_mdi(parent):
 def setup_hal(parent):
 	for button in parent.findChildren(QPushButton):
 		if button.property('function') == 'hal_pin':
-			print(f'{button.objectName()} {button.property("function")}')
+			#print(f'{button.objectName()} {button.property("function")}')
 			props = button.dynamicPropertyNames()
 			for prop in props:
 				prop = str(prop, 'utf-8')
