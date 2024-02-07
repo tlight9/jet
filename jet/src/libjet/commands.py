@@ -14,6 +14,10 @@ TELEOP_ENABLE = 1
 JOG_STOP = 0
 JOG_CONTINUOUS = 1
 JOG_INCREMENT = 2
+FLOOD_ON = 1
+FLOOD_OFF = 0
+MIST_ON = 1
+MIST_OFF = 0
 
 def set_mode(parent, mode=None):
 	if mode is None:
@@ -283,6 +287,45 @@ def tool_change(parent):
 			parent.command.wait_complete()
 	else:
 		print('No tool selected')
+
+def flood_coolant(parent):
+	if parent.coolant_flood_pb.isChecked():
+		print(f'Flood: {emc.stat.flood}')
+		mdi_command = f'M8'
+		if parent.status.task_state == emc.STATE_ON:
+			if parent.status.task_mode != emc.MODE_MANUAL:
+				parent.command.mode(emc.MODE_MANUAL)
+				parent.command.wait_complete()
+			parent.command.flood(emc.FLOOD_ON)
+			parent.command.wait_complete()
+	else:
+		print(f'Flood: {emc.stat.flood}')
+		mdi_command = f'M9'
+		if parent.status.task_state == emc.STATE_ON:
+			if parent.status.task_mode != emc.MODE_MANUAL:
+				parent.command.mode(emc.MODE_MANUAL)
+				parent.command.wait_complete()
+			parent.command.flood(emc.FLOOD_OFF)
+			parent.command.wait_complete()
+
+def mist_coolant(parent):
+	if parent.coolant_mist_pb.isChecked():
+		print(f'Mist: {emc.stat.mist}')
+		mdi_command = f'M7'
+		if parent.status.task_state == emc.STATE_ON:
+			if parent.status.task_mode != emc.MODE_MANUAL:
+				parent.command.mode(emc.MODE_MANUAL)
+				parent.command.wait_complete()
+			parent.command.mist(emc.MIST_ON)
+			parent.command.wait_complete()
+	else:
+		print(f'Mist: {emc.stat.mist}')
+		mdi_command = f'M9'
+		if parent.status.task_state == emc.STATE_ON:
+			parent.command.mode(emc.MODE_MANUAL)
+			parent.command.wait_complete()
+		parent.command.mist(emc.MIST_OFF)
+		parent.command.wait_complete()
 
 def spindle(parent):
 	pb = parent.sender().objectName()

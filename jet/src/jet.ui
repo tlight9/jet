@@ -7,11 +7,38 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>625</height>
    </rect>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_6">
+    <item row="3" column="2">
+     <widget class="QLabel" name="motion_line_lb">
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>FreeMono</family>
+        <pointsize>12</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
     <item row="3" column="5">
      <widget class="QLabel" name="state_lb">
       <property name="frameShape">
@@ -22,6 +49,123 @@
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="3">
+     <widget class="QLabel" name="tool_lb">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Start Line</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Motion Line</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="6">
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="1">
+        <widget class="QPushButton" name="power_pb">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Power Off</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QPushButton" name="step_pb">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Step</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="estop_pb">
+         <property name="text">
+          <string>E Stop</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QPushButton" name="resume_pb">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Resume</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="run_pb">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Run</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QPushButton" name="pause_pb">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Pause</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6">
+        <widget class="QPushButton" name="stop_pb">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="text">
+          <string>Stop</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="2" column="4" rowspan="2">
+     <widget class="QPushButton" name="manual_mode_pb">
+      <property name="text">
+       <string>Manual
+Mode</string>
       </property>
      </widget>
     </item>
@@ -121,14 +265,6 @@
       </layout>
      </widget>
     </item>
-    <item row="2" column="4" rowspan="2">
-     <widget class="QPushButton" name="manual_mode_pb">
-      <property name="text">
-       <string>Manual
-Mode</string>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="0">
      <widget class="QLabel" name="file_lb">
       <property name="text">
@@ -149,8 +285,8 @@ Mode</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="2">
-     <widget class="QLabel" name="motion_line_lb">
+    <item row="2" column="2">
+     <widget class="QLabel" name="start_line_lb">
       <property name="maximumSize">
        <size>
         <width>50</width>
@@ -176,99 +312,10 @@ Mode</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="3">
-     <widget class="QLabel" name="tool_lb">
-      <property name="frameShape">
-       <enum>QFrame::Box</enum>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="6">
-     <widget class="QFrame" name="frame">
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
-      </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="1">
-        <widget class="QPushButton" name="power_pb">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Power Off</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QPushButton" name="step_pb">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Step</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="estop_pb">
-         <property name="text">
-          <string>E Stop</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="5">
-        <widget class="QPushButton" name="resume_pb">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Resume</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="run_pb">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Run</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4">
-        <widget class="QPushButton" name="pause_pb">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Pause</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6">
-        <widget class="QPushButton" name="stop_pb">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="text">
-          <string>Stop</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </item>
     <item row="4" column="0" colspan="6">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="gcode_tab">
        <attribute name="title">
@@ -416,71 +463,57 @@ Mode</string>
         <string>Manual</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_8">
-        <item row="0" column="0">
-         <widget class="QGroupBox" name="groupBox_3">
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="groupBox_7">
           <property name="title">
-           <string>Jogging</string>
+           <string>Tool Change</string>
           </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="1" column="0">
-            <widget class="QPushButton" name="jog_plus_pb_0">
-             <property name="text">
-              <string>Jog X +</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QPushButton" name="jog_minus_pb_1">
-             <property name="text">
-              <string>Jog Y -</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QPushButton" name="jog_minus_pb_0">
-             <property name="text">
-              <string>Jog X -</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="jog_plus_pb_1">
-             <property name="text">
-              <string>Jog Y +</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QPushButton" name="jog_plus_pb_2">
-             <property name="text">
-              <string>Jog Z +</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QPushButton" name="jog_minus_pb_2">
-             <property name="text">
-              <string>Jog Z -</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="jog_modes_cb"/>
-           </item>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_16">
            <item row="0" column="0">
-            <widget class="QLabel" name="label_6">
+            <widget class="QPushButton" name="tool_change_pb">
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="toolTipDuration">
+              <number>-1</number>
+             </property>
              <property name="text">
-              <string>Jog Mode</string>
+              <string>Toolchange</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QSpinBox" name="tool_number_sb">
+             <property name="minimumSize">
+              <size>
+               <width>99</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>99</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="toolTipDuration">
+              <number>-1</number>
              </property>
              <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
           </layout>
          </widget>
         </item>
-        <item row="0" column="2">
+        <item row="1" column="2">
          <spacer name="horizontalSpacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -582,10 +615,80 @@ Mode</string>
           </layout>
          </widget>
         </item>
-        <item row="0" column="3">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Jogging</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="1" column="0">
+            <widget class="QPushButton" name="jog_plus_pb_0">
+             <property name="text">
+              <string>Jog X +</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="jog_minus_pb_1">
+             <property name="text">
+              <string>Jog Y -</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="jog_minus_pb_0">
+             <property name="text">
+              <string>Jog X -</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="jog_plus_pb_1">
+             <property name="text">
+              <string>Jog Y +</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QPushButton" name="jog_plus_pb_2">
+             <property name="text">
+              <string>Jog Z +</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QPushButton" name="jog_minus_pb_2">
+             <property name="text">
+              <string>Jog Z -</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="jog_modes_cb"/>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Jog Mode</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="4">
          <widget class="QGroupBox" name="groupBox_6">
           <property name="title">
            <string>Spindle</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
           <layout class="QGridLayout" name="gridLayout_13">
            <item row="1" column="0" colspan="2">
@@ -642,51 +745,46 @@ Mode</string>
           </layout>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="groupBox_7">
+        <item row="0" column="2">
+         <widget class="QGroupBox" name="groupBox_8">
           <property name="title">
-           <string>Tool Change</string>
+           <string>Coolant</string>
           </property>
-          <layout class="QGridLayout" name="gridLayout_16">
-           <item row="0" column="0">
-            <widget class="QPushButton" name="tool_change_pb">
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="toolTipDuration">
-              <number>-1</number>
-             </property>
-             <property name="text">
-              <string>Toolchange</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QSpinBox" name="tool_number_sb">
-             <property name="minimumSize">
-              <size>
-               <width>99</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>99</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="toolTip">
-              <string/>
-             </property>
-             <property name="toolTipDuration">
-              <number>-1</number>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <widget class="QPushButton" name="coolant_flood_pb">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>40</y>
+             <width>111</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Flood</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="coolant_mist_pb">
+           <property name="geometry">
+            <rect>
+             <x>20</x>
+             <y>80</y>
+             <width>111</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Mist</string>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
          </widget>
         </item>
        </layout>
@@ -895,43 +993,17 @@ Mode</string>
           </property>
          </widget>
         </item>
+        <item row="1" column="0" colspan="4">
+         <widget class="QLineEdit" name="mdi_command_le"/>
+        </item>
+        <item row="0" column="0" colspan="4">
+         <widget class="QListWidget" name="mdi_history_lw"/>
+        </item>
         <item row="2" column="2">
          <widget class="QPushButton" name="clear_mdi_history_pb">
           <property name="text">
            <string>Clear History</string>
           </property>
-         </widget>
-        </item>
-        <item row="1" column="0" colspan="3">
-         <widget class="QLineEdit" name="mdi_command_le"/>
-        </item>
-        <item row="0" column="0" colspan="3">
-         <widget class="QListWidget" name="mdi_history_lw"/>
-        </item>
-        <item row="0" column="3" rowspan="3">
-         <widget class="QGroupBox" name="groupBox_8">
-          <property name="title">
-           <string>MDI Commands</string>
-          </property>
-          <widget class="QPushButton" name="pushButton">
-           <property name="geometry">
-            <rect>
-             <x>20</x>
-             <y>40</y>
-             <width>87</width>
-             <height>27</height>
-            </rect>
-           </property>
-           <property name="text">
-            <string>G0 X0 Y0</string>
-           </property>
-           <property name="function" stdset="0">
-            <string>mdi</string>
-           </property>
-           <property name="command" stdset="0">
-            <string>G0 X0 Y0</string>
-           </property>
-          </widget>
          </widget>
         </item>
        </layout>
@@ -1019,80 +1091,6 @@ Mode</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_3">
-       <attribute name="title">
-        <string>Page</string>
-       </attribute>
-       <widget class="QPushButton" name="light">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>40</y>
-          <width>87</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Light</string>
-        </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
-        <property name="function" stdset="0">
-         <string>hal_pin</string>
-        </property>
-        <property name="pin_1" stdset="0">
-         <string>out, hal_bit, hal_out</string>
-        </property>
-       </widget>
-      </widget>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Motion Line</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>Start Line</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QLabel" name="start_line_lb">
-      <property name="maximumSize">
-       <size>
-        <width>50</width>
-        <height>16777215</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>FreeMono</family>
-        <pointsize>12</pointsize>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="frameShape">
-       <enum>QFrame::Box</enum>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-      </property>
      </widget>
     </item>
    </layout>
@@ -1119,7 +1117,6 @@ Mode</string>
      <string>Machine</string>
     </property>
     <addaction name="actionClear_MDI"/>
-    <addaction name="actionShow_HAL"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMachine"/>
@@ -1159,11 +1156,6 @@ Mode</string>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
-   </property>
-  </action>
-  <action name="actionShow_HAL">
-   <property name="text">
-    <string>Show HAL</string>
    </property>
   </action>
  </widget>
