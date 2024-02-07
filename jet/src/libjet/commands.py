@@ -202,6 +202,14 @@ def run_mdi(parent, cmd=''):
 				parent.command.wait_complete()
 			parent.pause_pb.setEnabled(True)
 			parent.command.mdi(mdi_command)
+			parent.status.poll()
+			while parent.status.state == parent.emc.RCS_EXEC:
+				parent.status.poll()
+			if parent.status.state == parent.emc.RCS_DONE:
+				print('done')
+
+			'''
+
 			parent.command.wait_complete()
 			parent.status.poll()
 			if parent.status.state != parent.emc.RCS_ERROR:
@@ -219,6 +227,7 @@ def run_mdi(parent, cmd=''):
 						f.write('\n'.join(mdi_codes))
 				parent.command.mode(emc.MODE_MANUAL)
 				parent.command.wait_complete()
+			'''
 	else:
 		print('no mdi')
 
