@@ -1,12 +1,12 @@
-JET GUI
-=======
+Flex GUI
+========
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
    install
-   test
+   testing
    ini
    designer
    menu
