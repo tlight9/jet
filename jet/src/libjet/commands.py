@@ -287,7 +287,6 @@ def flood_coolant(parent):
 			parent.command.wait_complete()
 	else:
 		print(f'FLOOD_ON = {parent.emc.FLOOD_ON}')
-		mdi_command = f'M9'
 		if parent.status.task_state == emc.STATE_ON:
 			if parent.status.task_mode != emc.MODE_MANUAL:
 				parent.command.mode(emc.MODE_MANUAL)
