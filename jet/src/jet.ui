@@ -315,7 +315,7 @@ Mode</string>
     <item row="4" column="0" colspan="6">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="gcode_tab">
        <attribute name="title">
@@ -787,7 +787,7 @@ Mode</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
+           <item row="3" column="0">
             <spacer name="verticalSpacer_4">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -799,6 +799,19 @@ Mode</string>
               </size>
              </property>
             </spacer>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="pushButton">
+             <property name="text">
+              <string>Coolant Off</string>
+             </property>
+             <property name="function" stdset="0">
+              <string>mdi</string>
+             </property>
+             <property name="command" stdset="0">
+              <string>M9</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>

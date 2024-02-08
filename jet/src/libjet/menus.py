@@ -54,5 +54,5 @@ def clear_mdi(parent):
 		f.write('')
 
 def show_hal(parent):
-	subprocess.run(['halshow'], text=True, capture_output=True)
+	subprocess.Popen('halshow')
 
