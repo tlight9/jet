@@ -26,6 +26,10 @@ def update(parent):
 	if parent.tool_lb_exists:
 		tool = parent.status.tool_in_spindle
 		parent.tool_lb.setText(f'Tool: {tool}')
+	if parent.feed_lb_exists:
+		feed = parent.status.settings[1]
+		feed = round(feed,2)
+		parent.feed_lb.setText(f'Feed: {feed}')
 
 	task_state = parent.status.task_state
 	if task_state == parent.emc.STATE_ESTOP:

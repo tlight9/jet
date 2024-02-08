@@ -1122,6 +1122,19 @@ Mode</string>
       </widget>
      </widget>
     </item>
+    <item row="2" column="3">
+     <widget class="QLabel" name="feed_lb">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
