@@ -122,7 +122,7 @@ class jet_gui(QMainWindow):
 
 		size = self.inifile.find('DISPLAY', 'SIZE') or False
 
-		#self.c = None
+		self.mdi_command = False
 
 		connections.connect(self)
 		startup.set_labels(self)

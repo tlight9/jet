@@ -1,8 +1,15 @@
+
 from PyQt6.QtGui import QTextCursor, QTextBlockFormat, QColor
 from PyQt6.QtWidgets import QTextEdit, QWidget
 
+from libjet import utilities
+
 def update(parent):
 	parent.status.poll()
+
+	if parent.mdi_command and parent.status.state == parent.emc.RCS_DONE:
+		utilities.update_mdi(parent)
+
 	task_mode = {1: 'MANUAL', 2: 'AUTO', 3: 'MDI'}
 	if parent.status_lb_exists:
 		parent.status_lb.setText(task_mode[parent.status.task_mode])

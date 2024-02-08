@@ -194,6 +194,7 @@ def run_mdi(parent, cmd=''):
 		mdi_command = cmd
 	else:
 		mdi_command = parent.mdi_command_le.text()
+	parent.mdi_command = mdi_command
 
 	if mdi_command:
 		if parent.status.task_state == emc.STATE_ON:
@@ -202,12 +203,12 @@ def run_mdi(parent, cmd=''):
 				parent.command.wait_complete()
 			parent.pause_pb.setEnabled(True)
 			parent.command.mdi(mdi_command)
+	'''
 			parent.status.poll()
 			while parent.status.state == parent.emc.RCS_EXEC:
 				parent.status.poll()
 			if parent.status.state == parent.emc.RCS_DONE:
 				print('done')
-	'''
 				if parent.mdi_history_lw_exists:
 					parent.mdi_history_lw.addItem(mdi_command)
 				parent.mdi_command_le.setText('')
