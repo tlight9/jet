@@ -1146,6 +1146,7 @@ Mode</string>
      <string>Machine</string>
     </property>
     <addaction name="actionClear_MDI"/>
+    <addaction name="actionShow_HAL"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMachine"/>
@@ -1185,6 +1186,11 @@ Mode</string>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionShow_HAL">
+   <property name="text">
+    <string>Show HAL</string>
    </property>
   </action>
  </widget>
