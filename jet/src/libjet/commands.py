@@ -14,10 +14,6 @@ TELEOP_ENABLE = 1
 JOG_STOP = 0
 JOG_CONTINUOUS = 1
 JOG_INCREMENT = 2
-FLOOD_ON = 1
-FLOOD_OFF = 0
-MIST_ON = 1
-MIST_OFF = 0
 
 def set_mode(parent, mode=None):
 	if mode is None:
@@ -282,8 +278,7 @@ def tool_change(parent):
 
 def flood_coolant(parent):
 	if parent.coolant_flood_pb.isChecked():
-		print(f'Flood: {emc.stat.flood}')
-		mdi_command = f'M8'
+		print(f'FLOOD_OFF = {parent.emc.FLOOD_OFF}')
 		if parent.status.task_state == emc.STATE_ON:
 			if parent.status.task_mode != emc.MODE_MANUAL:
 				parent.command.mode(emc.MODE_MANUAL)
@@ -291,8 +286,7 @@ def flood_coolant(parent):
 			parent.command.flood(emc.FLOOD_ON)
 			parent.command.wait_complete()
 	else:
-		print(f'Flood: {emc.stat.flood}')
-		mdi_command = f'M9'
+		print(f'FLOOD_ON = {parent.emc.FLOOD_ON}')
 		if parent.status.task_state == emc.STATE_ON:
 			if parent.status.task_mode != emc.MODE_MANUAL:
 				parent.command.mode(emc.MODE_MANUAL)
@@ -302,8 +296,7 @@ def flood_coolant(parent):
 
 def mist_coolant(parent):
 	if parent.coolant_mist_pb.isChecked():
-		print(f'Mist: {emc.stat.mist}')
-		mdi_command = f'M7'
+		print(f'MIST_OFF = {parent.emc.MIST_OFF}')
 		if parent.status.task_state == emc.STATE_ON:
 			if parent.status.task_mode != emc.MODE_MANUAL:
 				parent.command.mode(emc.MODE_MANUAL)
@@ -311,8 +304,7 @@ def mist_coolant(parent):
 			parent.command.mist(emc.MIST_ON)
 			parent.command.wait_complete()
 	else:
-		print(f'Mist: {emc.stat.mist}')
-		mdi_command = f'M9'
+		print(f'MIST_ON = {parent.emc.MIST_ON}')
 		if parent.status.task_state == emc.STATE_ON:
 			parent.command.mode(emc.MODE_MANUAL)
 			parent.command.wait_complete()
