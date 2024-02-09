@@ -1042,7 +1042,56 @@ Mode</string>
         <string>Status</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_10">
-        <item row="0" column="0" rowspan="3">
+        <item row="5" column="2">
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>In Position</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QLabel" name="interp_state_lb">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" rowspan="7">
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Current Offsets</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QLabel" name="task_state_lb">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="label_7">
+          <property name="text">
+           <string>Task State</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>Interp State</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="2">
+         <widget class="QPushButton" name="exit_pb">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" rowspan="8">
          <widget class="QGroupBox" name="groupBox_2">
           <property name="title">
            <string>Errors</string>
@@ -1080,31 +1129,10 @@ Mode</string>
           </layout>
          </widget>
         </item>
-        <item row="1" column="1">
-         <widget class="QGroupBox" name="groupBox_4">
-          <property name="title">
-           <string>Current Offsets</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QLabel" name="task_state_lb">
+        <item row="6" column="2">
+         <widget class="QLabel" name="inpos_lb">
           <property name="text">
            <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="interp_state_lb">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QPushButton" name="exit_pb">
-          <property name="text">
-           <string/>
           </property>
          </widget>
         </item>

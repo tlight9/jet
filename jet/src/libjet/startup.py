@@ -33,7 +33,8 @@ def set_labels(parent):
 	'jog_vel_lb', 'g_codes_lb', 'm_codes_lb',
 	'g5x_offsets_lb', 'g92_offsets_lb',
 	'interp_state_lb', 'task_state_lb',
-	'tool_lb', 'jog_units_lb', 'feed_lb']
+	'tool_lb', 'jog_units_lb', 'feed_lb',
+	'inpos_lb']
 	children = parent.findChildren(QLabel)
 	found_label_list = []
 	for child in children:
