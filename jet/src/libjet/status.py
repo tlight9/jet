@@ -87,6 +87,11 @@ def update(parent):
 		#parent.step_pb.setEnabled(False)
 		parent.pause_pb.setEnabled(True)
 
+	if parent.status.inpos:
+		parent.step_pb.setEnabled(True)
+	else:
+		parent.step_pb.setEnabled(False)
+
 	if parent.status.state == parent.emc.RCS_DONE and parent.status.task_state == parent.emc.STATE_ON:
 		parent.run_pb.setEnabled(True)
 		parent.step_pb.setEnabled(True)
