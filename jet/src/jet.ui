@@ -315,7 +315,7 @@ Mode</string>
     <item row="4" column="0" colspan="6">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="gcode_tab">
        <attribute name="title">
@@ -1147,6 +1147,30 @@ Mode</string>
          <widget class="QWidget" name="plot_widget" native="true"/>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>HAL</string>
+       </attribute>
+       <widget class="QPushButton" name="lights">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>30</y>
+          <width>87</width>
+          <height>27</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Lights</string>
+        </property>
+        <property name="function" stdset="0">
+         <string>hal_pin</string>
+        </property>
+        <property name="pin_0" stdset="0">
+         <string>out, hal_bit, hal_out</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
