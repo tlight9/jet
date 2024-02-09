@@ -41,7 +41,7 @@ def update(parent):
 	if flood_state == parent.emc.FLOOD_OFF:
 		if parent.coolant_flood_pb.isChecked() == True:
 			parent.coolant_flood_pb.setChecked(False)
-	if flood_state == parent.emc.FLOOD_ON: 
+	else:
 		if parent.coolant_flood_pb.isChecked() == False:
 			parent.coolant_flood_pb.setChecked(True)
 
@@ -49,7 +49,7 @@ def update(parent):
 	if mist_state == parent.emc.MIST_OFF:
 		if parent.coolant_mist_pb.isChecked() == True:
 			parent.coolant_mist_pb.setChecked(False)
-	if mist_state == parent.emc.MIST_ON: 
+	else:
 		if parent.coolant_mist_pb.isChecked() == False:
 			parent.coolant_mist_pb.setChecked(True)
 
