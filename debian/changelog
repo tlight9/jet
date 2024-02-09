@@ -1,3 +1,9 @@
+jet (0.3.0) unstable; urgency=medium
+
+  * Fix MDI
+
+ -- John Thornton <dev@gnipsel.com>  Thu, 08 Feb 2024 09:20:13 -0600
+
 jet (0.2.0) unstable; urgency=medium
 
   * Add touch screen input pads
