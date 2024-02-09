@@ -37,6 +37,22 @@ def update(parent):
 		feed = round(parent.status.settings[1],2)
 		parent.feed_lb.setText(f'Feed: {feed}')
 
+	flood_state = parent.status.flood
+	if flood_state == parent.emc.FLOOD_OFF:
+		if parent.coolant_flood_pb.isChecked() == 1:
+			parent.coolant_flood_pb.setChecked(False)
+	if flood_state == parent.emc.FLOOD_ON: 
+		if parent.coolant_flood_pb.isChecked() == 0:
+			parent.coolant_flood_pb.setChecked(True)
+
+	mist_state = parent.status.mist
+	if mist_state == parent.emc.MIST_OFF:
+		if parent.coolant_mist_pb.isChecked() == 1:
+			parent.coolant_mist_pb.setChecked(False)
+	if mist_state == parent.emc.MIST_ON: 
+		if parent.coolant_mist_pb.isChecked() == 0:
+			parent.coolant_mist_pb.setChecked(True)
+
 	task_state = parent.status.task_state
 	if task_state == parent.emc.STATE_ESTOP:
 		parent.estop_pb.setStyleSheet('background-color: rgba(255, 0, 0, 25%);')
