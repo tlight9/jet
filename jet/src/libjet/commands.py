@@ -64,6 +64,7 @@ def run(parent):
 	if parent.status.task_state == emc.STATE_ON:
 		if parent.status.task_mode != emc.MODE_AUTO:
 			parent.command.mode(emc.MODE_AUTO)
+			parent.command.wait_complete()
 		parent.pause_pb.setEnabled(True)
 		if parent.start_line_lb_exists:
 			if parent.start_line_lb.text():
@@ -76,6 +77,7 @@ def step(parent):
 	if parent.status.task_state == emc.STATE_ON:
 		if parent.status.task_mode != emc.MODE_AUTO:
 			parent.command.mode(emc.MODE_AUTO)
+			parent.command.wait_complete()
 		parent.command.auto(emc.AUTO_STEP)
 
 def pause(parent):
