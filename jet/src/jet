@@ -143,7 +143,6 @@ class jet_gui(QMainWindow):
 		self.timer.timeout.connect(self.update_status)
 		self.timer.start(10) # milliseconds
 
-
 		# set the inital screen size
 		if size:
 			if size.lower() == 'minimized':
@@ -156,6 +155,8 @@ class jet_gui(QMainWindow):
 				self.showFullScreen()
 		else:
 			self.show()
+
+		startup.postgui_hal(self)
 
 	def check_emc(self):
 		cp = subprocess.run(['pgrep', '-l', 'linuxcnc'], text=True, capture_output=True)

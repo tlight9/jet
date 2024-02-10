@@ -142,16 +142,42 @@ def setup_mdi(parent):
 					cmd = button.property(prop)
 					getattr(parent, f'{button.objectName()}').clicked.connect(partial(commands.run_mdi, parent, cmd))
 
+def postgui_hal(parent):
+	postgui_halfiles = parent.inifile.findall("HAL", "POSTGUI_HALFILE") or None
+	if postgui_halfiles is not None:
+		for f in postgui_halfiles:
+			if f.lower().endswith('.tcl'):
+				res = os.spawnvp(os.P_WAIT, "haltcl", ["haltcl", "-i", parent.ini_path, f])
+			else:
+				res = os.spawnvp(os.P_WAIT, "halcmd", ["halcmd", "-i", parent.ini_path, "-f", f])
+			if res: raise SystemExit(res)
+
 def setup_hal(parent):
+	parent.hal_test = hal.component('test')
+	parent.hal_test.newpin('out', hal.HAL_BIT, hal.HAL_OUT)
+	parent.hal_test.ready()
+
+	'''
 	for button in parent.findChildren(QPushButton):
 		if button.property('function') == 'hal_pin':
 			#print(f'{button.objectName()} {button.property("function")}')
 			props = button.dynamicPropertyNames()
 			for prop in props:
 				prop = str(prop, 'utf-8')
-				if not prop.startswith('_'):
-					print(button.property(prop))
-	i = 0
+				if prop.startswith('pin_'):
+					pin_settings = button.property(prop).split(',')
+					name = button.objectName()
+					setattr(parent, f'hal_{name}', None)
+					setattr(parent, f'hal_{name}', hal.component(f'{name}'))
+					pin_name = pin_settings[0]
+					pin_type = getattr(hal, f'{pin_settings[1].upper().strip()}')
+					pin_dir = getattr(hal, f'{pin_settings[2].upper().strip()}')
+					getattr(parent, f'hal_{name}').newpin(pin_name, pin_type, pin_dir)
+					getattr(parent, f'hal_{name}').ready()
+					print(button)
+					button.clicked.connect(getattr(parent, f'hal_{name}'))
+
+
 	#setattr(parent, f'c_{i}', None)
 	#setattr(parent, f'c_{i}', hal.component('buttons'))
 	#getattr(parent, f'c_{i}').newpin('out', hal.HAL_BIT, hal.HAL_OUT)
@@ -165,6 +191,7 @@ def setup_hal(parent):
 	#c.newpin('out', hal.HAL_BIT, hal.HAL_OUT)
 	#c.ready()
 	#print(hal.component_exists("buttons"))
+	'''
 
 def print_constants(parent):
 	print(f'MODE_MANUAL = {parent.emc.MODE_MANUAL}')
