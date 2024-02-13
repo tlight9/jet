@@ -36,6 +36,10 @@ def update(parent):
 	if parent.feed_lb_exists:
 		feed = round(parent.status.current_vel*60,2)
 		parent.feed_lb.setText(f'Feed: {feed}')
+	if parent.speed_lb_exists:
+		speed = parent.status.spindle[0].get('speed')
+#		print(f'{speed}')
+		parent.speed_lb.setText(f'Speed: {speed}')
 
 	flood_state = parent.status.flood
 	if flood_state == parent.emc.FLOOD_OFF:
