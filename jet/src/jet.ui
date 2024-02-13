@@ -1164,6 +1164,9 @@ Mode</string>
         <property name="text">
          <string>Lights</string>
         </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
         <property name="function" stdset="0">
          <string>hal_pin</string>
         </property>

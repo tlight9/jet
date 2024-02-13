@@ -133,7 +133,7 @@ class jet_gui(QMainWindow):
 		startup.get_list_widgets(self)
 		startup.get_pte(self)
 		startup.load_mdi(self)
-		#startup.setup_hal(self)
+		startup.setup_hal(self)
 		startup.setup_mdi(self)
 		#startup.print_constants(self)
 		startup.test(self)
