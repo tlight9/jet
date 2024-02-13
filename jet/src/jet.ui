@@ -1174,8 +1174,21 @@ Mode</string>
       </widget>
      </widget>
     </item>
-    <item row="2" column="3">
+    <item row="0" column="5">
      <widget class="QLabel" name="feed_lb">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4">
+     <widget class="QLabel" name="speed_lb">
       <property name="frameShape">
        <enum>QFrame::Box</enum>
       </property>
