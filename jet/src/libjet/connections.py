@@ -86,7 +86,9 @@ def connect(parent):
 	'actionReload': 'file_reload',
 	'actionExit': 'app_close',
 	'actionClear_MDI': 'clear_mdi',
-	'actionShow_HAL': 'show_hal'}
+	'actionShow_HAL': 'show_hal',
+	'actionReload_Tooltable': 'load_tool_table'}
+
 	action_list = []
 	for action in parent.findChildren(QAction):
 		if action.objectName():

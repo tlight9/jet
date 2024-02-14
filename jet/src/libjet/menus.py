@@ -56,3 +56,6 @@ def clear_mdi(parent):
 def show_hal(parent):
 	subprocess.Popen('halshow')
 
+def load_tool_table(parent):
+	parent.command.load_tool_table()
+
