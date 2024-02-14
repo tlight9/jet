@@ -13,6 +13,14 @@ import hal
 from libjet import commands
 from libjet import editor
 
+def check_required(parent):
+	required_buttons = ['estop_pb', 'power_pb', 'run_pb', 'stop_pb']
+	for button in required_buttons:
+		if not parent.findChild(QPushButton, button):
+			print(f'Required QPushButton {button} missing')
+			sys.exit()
+
+
 def set_menu_items(parent):
 	if len(parent.status.file) > 0:
 		parent.actionReload.setEnabled(True)
@@ -170,14 +178,17 @@ def setup_hal(parent):
 					#print(f'pin_type {pin_type}')
 					pin_dir = getattr(hal, f'{pin_settings[2].upper().strip()}')
 					#print(f'pin_dir {pin_dir}')
-					parent.hal_comp = hal.component('jet')
+					parent.halcomp = hal.component('jet')
 					#print(f'{parent.hal_comp.getprefix()}')
-					setattr(parent, f'{prop}', parent.hal_comp.newpin(pin_name, pin_type, pin_dir))
+					#setattr(parent, f'{prop}', parent.hal_comp.newpin(pin_name, pin_type, pin_dir))
 					#print(getattr(parent, f'{prop}').name)
-					print(parent.hal_comp[pin_name])
-					print(parent.hal_comp.getpins())
-					print(dir(parent.hal_comp))
+					#print(parent.hal_comp[pin_name])
+					#print(parent.hal_comp.getpins())
+					#print(dir(parent.hal_comp))
 					#print(f'parent.{prop}')
+					setattr(parent, f'{prop}', parent.halcomp.newpin(pin_name, pin_type, pin_dir))
+					getattr(parent, f'{name}').toggled.connect(lambda:
+						getattr(parent, f'{prop}').set(getattr(parent, f'{name}').isChecked()))
 					#pin = parent.hal_comp.newpin(pin_name, pin_type, pin_dir)
 					#print(f'{parent.hal_comp.getpins()}')
 					#self.test_hal.toggled.connect(lambda: self.out2.set(self.test_hal.isChecked()))

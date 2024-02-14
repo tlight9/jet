@@ -99,6 +99,7 @@ class jet_gui(QMainWindow):
 			gui_path = os.path.join(self.gui_path, 'jet.ui')
 
 		loadUi(gui_path, self)
+		startup.check_required(self)
 
 		# find and load the stylesheet
 		stylesheet = None
