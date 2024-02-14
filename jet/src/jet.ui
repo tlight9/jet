@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>625</height>
+    <height>627</height>
    </rect>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -1228,6 +1228,7 @@ Mode</string>
     </property>
     <addaction name="actionClear_MDI"/>
     <addaction name="actionShow_HAL"/>
+    <addaction name="actionReload_Tooltable"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMachine"/>
@@ -1272,6 +1273,11 @@ Mode</string>
   <action name="actionShow_HAL">
    <property name="text">
     <string>Show HAL</string>
+   </property>
+  </action>
+  <action name="actionReload_Tooltable">
+   <property name="text">
+    <string>Reload ToolTable</string>
    </property>
   </action>
  </widget>
