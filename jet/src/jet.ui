@@ -315,7 +315,7 @@ Mode</string>
     <item row="4" column="0" colspan="6">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="gcode_tab">
        <attribute name="title">
@@ -1061,6 +1061,44 @@ Mode</string>
           <property name="title">
            <string>Current Offsets</string>
           </property>
+          <widget class="QLabel" name="tool_offset_lb">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>60</y>
+             <width>151</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="tool_diam_lb">
+           <property name="geometry">
+            <rect>
+             <x>10</x>
+             <y>30</y>
+             <width>151</width>
+             <height>20</height>
+            </rect>
+           </property>
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+           </property>
+          </widget>
          </widget>
         </item>
         <item row="2" column="2">
@@ -1164,9 +1202,6 @@ Mode</string>
         <property name="text">
          <string>Lights</string>
         </property>
-        <property name="checkable">
-         <bool>true</bool>
-        </property>
         <property name="function" stdset="0">
          <string>hal_pin</string>
         </property>
@@ -1177,8 +1212,8 @@ Mode</string>
       </widget>
      </widget>
     </item>
-    <item row="0" column="5">
-     <widget class="QLabel" name="feed_lb">
+    <item row="0" column="4">
+     <widget class="QLabel" name="speed_lb">
       <property name="frameShape">
        <enum>QFrame::Box</enum>
       </property>
@@ -1190,8 +1225,8 @@ Mode</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="4">
-     <widget class="QLabel" name="speed_lb">
+    <item row="0" column="5">
+     <widget class="QLabel" name="feed_lb">
       <property name="frameShape">
        <enum>QFrame::Box</enum>
       </property>
@@ -1228,6 +1263,7 @@ Mode</string>
     </property>
     <addaction name="actionClear_MDI"/>
     <addaction name="actionShow_HAL"/>
+    <addaction name="separator"/>
     <addaction name="actionReload_Tooltable"/>
    </widget>
    <addaction name="menuFile"/>
@@ -1277,7 +1313,7 @@ Mode</string>
   </action>
   <action name="actionReload_Tooltable">
    <property name="text">
-    <string>Reload ToolTable</string>
+    <string>Reload Tooltable</string>
    </property>
   </action>
  </widget>

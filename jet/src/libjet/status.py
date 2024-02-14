@@ -41,6 +41,17 @@ def update(parent):
 #		print(f'{speed}')
 		parent.speed_lb.setText(f'Speed: {speed}')
 
+	if parent.tool_offset_lb:
+			t_offset = parent.status.tool_table[0].zoffset
+#			print(f'Current tool offset: {t_offset}')
+			parent.tool_offset_lb.setText(f'Tool Z Offset: {t_offset}')
+
+	if parent.tool_diam_lb:
+			t_diam = parent.status.tool_table[0].diameter
+#			print(f'Current tool diameter: {t_diam}')
+			parent.tool_diam_lb.setText(f'Tool Diam: {t_diam}')
+
+
 	flood_state = parent.status.flood
 	if flood_state == parent.emc.FLOOD_OFF:
 		if parent.coolant_flood_pb.isChecked() == True:
