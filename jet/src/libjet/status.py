@@ -1,6 +1,6 @@
 
 from PyQt6.QtGui import QTextCursor, QTextBlockFormat, QColor
-from PyQt6.QtWidgets import QTextEdit, QWidget
+from PyQt6.QtWidgets import QTextEdit, QWidget, QPushButton
 
 from libjet import utilities
 
@@ -42,20 +42,22 @@ def update(parent):
 		parent.speed_lb.setText(f'Speed: {speed}')
 
 	flood_state = parent.status.flood
-	if flood_state == parent.emc.FLOOD_OFF:
-		if parent.coolant_flood_pb.isChecked() == True:
-			parent.coolant_flood_pb.setChecked(False)
-	else:
-		if parent.coolant_flood_pb.isChecked() == False:
-			parent.coolant_flood_pb.setChecked(True)
+	if parent.findChild(QPushButton, 'coolant_flood_pb'):
+		if flood_state == parent.emc.FLOOD_OFF:
+			if parent.coolant_flood_pb.isChecked() == True:
+				parent.coolant_flood_pb.setChecked(False)
+		else:
+			if parent.coolant_flood_pb.isChecked() == False:
+				parent.coolant_flood_pb.setChecked(True)
 
 	mist_state = parent.status.mist
-	if mist_state == parent.emc.MIST_OFF:
-		if parent.coolant_mist_pb.isChecked() == True:
-			parent.coolant_mist_pb.setChecked(False)
-	else:
-		if parent.coolant_mist_pb.isChecked() == False:
-			parent.coolant_mist_pb.setChecked(True)
+	if parent.findChild(QPushButton, 'coolant_mist_pb'):
+		if mist_state == parent.emc.MIST_OFF:
+			if parent.coolant_mist_pb.isChecked() == True:
+				parent.coolant_mist_pb.setChecked(False)
+		else:
+			if parent.coolant_mist_pb.isChecked() == False:
+				parent.coolant_mist_pb.setChecked(True)
 
 	task_state = parent.status.task_state
 	if task_state == parent.emc.STATE_ESTOP:
