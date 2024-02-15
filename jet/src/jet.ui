@@ -909,14 +909,27 @@ Mode</string>
            <set>Qt::AlignCenter</set>
           </property>
           <layout class="QGridLayout" name="gridLayout_14">
-           <item row="2" column="1">
-            <widget class="QPushButton" name="tool_touchoff_z">
+           <item row="2" column="0">
+            <widget class="QPushButton" name="z_tool_touchoff_pb">
              <property name="text">
               <string>Touch Off Z</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
+           <item row="4" column="0">
+            <widget class="QPushButton" name="numberpad_pb_2">
+             <property name="text">
+              <string>Number Pad</string>
+             </property>
+             <property name="target" stdset="0">
+              <string>tool_touchoff_dsb</string>
+             </property>
+             <property name="type" stdset="0">
+              <string>float</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
             <widget class="QDoubleSpinBox" name="tool_touchoff_dsb">
              <property name="decimals">
               <number>3</number>
@@ -935,37 +948,17 @@ Mode</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="tool_touchoff_x">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="x_tool_touchoff_pb">
              <property name="text">
               <string>Touch Off X</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="tool_touchoff_y">
+           <item row="1" column="0">
+            <widget class="QPushButton" name="y_tool_touchoff_pb">
              <property name="text">
               <string>Touch Off Y</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="Tool_no">
-             <property name="text">
-              <string>Tool:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="QPushButton" name="numberpad_pb_2">
-             <property name="text">
-              <string>Number Pad</string>
-             </property>
-             <property name="target" stdset="0">
-              <string>tool_touchoff_dsb</string>
-             </property>
-             <property name="type" stdset="0">
-              <string>float</string>
              </property>
             </widget>
            </item>

@@ -241,7 +241,7 @@ def touchoff(parent):
 		parent.command.wait_complete()
 
 def tool_touchoff(parent):
-	axis = parent.sender().objectName()[-1].upper()
+	axis = parent.sender().objectName()[0].upper()
 	cur_pos = parent.status.actual_position
 	cur_tool = parent.status.tool_in_spindle
 	offset = parent.tool_touchoff_dsb.value()
