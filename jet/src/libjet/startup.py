@@ -42,7 +42,20 @@ def set_labels(parent):
 	'g5x_offsets_lb', 'g92_offsets_lb',
 	'interp_state_lb', 'task_state_lb',
 	'tool_lb', 'jog_units_lb', 'feed_lb',
-	'speed_lb',	'inpos_lb']
+	'speed_lb',	'tool_offset_lb', 'tool_diam_lb', 'inpos_lb',
+	's_brake_lb', 's_direction_lb', 's_enabled_lb', 
+	's_homed_lb', 's_increasing_lb', 's_orient_fault_lb', 
+	's_orient_state_lb', 's_override_lb', 
+	's_override_enabled_lb', 's_speed_lb',
+	'j_backlash_lb', 'j_enabled_lb', 'j_fault_lb', 
+	'j_ferror_current_lb', 'j_ferror_highmark_lb', 
+	'j_homed_lb', 'j_homing_lb', 'j_inpos_lb', 
+	'j_input_lb', 'j_jointType_lb', 'j_max_ferror_lb', 
+	'j_max_hard_limit_lb', 'j_max_position_limit_lb', 
+	'j_max_soft_limit_lb', 'j_min_ferror_lb', 
+	'j_min_hard_limit_lb', 'j_min_position_limit_lb', 
+	'j_min_soft_limit_lb', 'j_output_lb', 'j_override_limits_lb', 
+	'j_units_lb', 'j_velocity_lb',]
 	children = parent.findChildren(QLabel)
 	found_label_list = []
 	for child in children:

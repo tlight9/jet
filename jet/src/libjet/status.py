@@ -1,6 +1,6 @@
 
 from PyQt6.QtGui import QTextCursor, QTextBlockFormat, QColor
-from PyQt6.QtWidgets import QTextEdit, QWidget, QPushButton
+from PyQt6.QtWidgets import QTextEdit, QWidget, QPushButton, QLabel
 
 from libjet import utilities
 
@@ -38,8 +38,114 @@ def update(parent):
 		parent.feed_lb.setText(f'Feed: {feed}')
 	if parent.speed_lb_exists:
 		speed = parent.status.spindle[0].get('speed')
-#		print(f'{speed}')
 		parent.speed_lb.setText(f'Speed: {speed}')
+	if parent.tool_offset_lb:
+			t_offset = parent.status.tool_table[0].zoffset
+			parent.tool_offset_lb.setText(f'Tool Z Offset: {t_offset}')
+	if parent.tool_diam_lb:
+			t_diam = parent.status.tool_table[0].diameter
+			parent.tool_diam_lb.setText(f'Tool Diam: {t_diam}')
+
+#	Spindle dict
+	if parent.findChild(QLabel, 's_brake_lb'):
+		s_brake = parent.status.spindle[0]['brake']			
+		parent.s_brake_lb.setText(f'Brake: {s_brake}')
+	if parent.findChild(QLabel, 's_direction_lb'):
+		s_direction = parent.status.spindle[0]['direction']		
+		parent.s_direction_lb.setText(f'Direction: {s_direction}')
+	if parent.findChild(QLabel, 's_enabled_lb'):
+		s_enabled = parent.status.spindle[0]['enabled']		
+		parent.s_enabled_lb.setText(f'Enabled: {s_enabled}')
+	if parent.findChild(QLabel, 's_homed_lb'):
+		s_homed = parent.status.spindle[0]['homed']
+		parent.s_homed_lb.setText(f'Homed: {s_homed}')
+#	POSSIBLY UNDEFINED
+	if parent.findChild(QLabel, 's_increasing_lb'):
+		s_increasing = parent.status.spindle[0].get('increasing')
+		parent.s_increasing_lb.setText(f'Increasing: {s_increasing}')
+	if parent.findChild(QLabel, 's_orient_fault_lb'):
+		s_orient_fault = parent.status.spindle[0]['orient_fault']
+		parent.s_orient_fault_lb.setText(f'Orient Fault: {s_orient_fault}')
+	if parent.findChild(QLabel, 's_orient_state_lb'):
+		s_orient_state = parent.status.spindle[0]['orient_state']
+		parent.s_orient_state_lb.setText(f'Orient: {s_orient_state}')
+	if parent.findChild(QLabel, 's_override_lb'):
+		s_override = parent.status.spindle[0]['override']
+		parent.s_override_lb.setText(f'Override: {s_override}')
+	if parent.findChild(QLabel, 's_override_enabled_lb'):
+		s_override_enabled = parent.status.spindle[0]['override_enabled']
+		parent.s_override_enabled_lb.setText(f'Override En: {s_override_enabled}')
+	if parent.findChild(QLabel, 's_speed_lb'):
+		s_speed = parent.status.spindle[0]['speed']
+		parent.s_speed_lb.setText(f'Speed: {s_speed}')
+
+#	Joint dict
+	if parent.findChild(QLabel, 'j_backlash_lb'):
+		j_backlash = parent.status.joint[0]['backlash']
+		parent.j_backlash_lb.setText(f'Backlash: {j_backlash}')
+	if parent.findChild(QLabel, 'j_enabled_lb'):
+		j_enabled = parent.status.joint[0]['enabled']
+		parent.j_enabled_lb.setText(f'Enabled: {j_enabled}')
+	if parent.findChild(QLabel, 'j_fault_lb'):
+		j_fault = parent.status.joint[0]['fault']
+		parent.j_fault_lb.setText(f'Fault: {j_fault}')
+	if parent.findChild(QLabel, 'j_ferror_current_lb'):
+		j_ferror_current = parent.status.joint[0]['ferror_current']
+		parent.j_ferror_current_lb.setText(f'Ferror_current: {j_ferror_current}')
+	if parent.findChild(QLabel, 'j_ferror_highmark_lb'):
+		j_ferror_highmark = parent.status.joint[0]['ferror_highmark']
+		parent.j_ferror_highmark_lb.setText(f'Ferror_highmark: {j_ferror_highmark}')
+	if parent.findChild(QLabel, 'j_homed_lb'):
+		j_homed = parent.status.joint[0]['homed']
+		parent.j_homed_lb.setText(f'Homed: {j_homed}')
+	if parent.findChild(QLabel, 'j_homing_lb'):
+		j_homing = parent.status.joint[0]['homing']
+		parent.j_homing_lb.setText(f'Homing: {j_homing}')
+	if parent.findChild(QLabel, 'j_inpos_lb'):
+		j_inpos = parent.status.joint[0]['inpos']
+		parent.j_inpos_lb.setText(f'Inpos: {j_inpos}')
+	if parent.findChild(QLabel, 'j_input_lb'):
+		j_input = parent.status.joint[0]['input']
+		parent.j_input_lb.setText(f'Input: {j_input}')
+	if parent.findChild(QLabel, 'j_jointType_lb'):
+		j_jointType = parent.status.joint[0]['jointType']
+		parent.j_jointType_lb.setText(f'JointType: {j_jointType}')
+	if parent.findChild(QLabel, 'j_max_ferror_lb'):
+		j_max_ferror = parent.status.joint[0]['max_ferror']
+		parent.j_max_ferror_lb.setText(f'Max_ferror: {j_max_ferror}')
+	if parent.findChild(QLabel, 'j_max_hard_limit_lb'):
+		j_max_hard_limit = parent.status.joint[0]['max_hard_limit']
+		parent.j_max_hard_limit_lb.setText(f'Max_hard_limit: {j_max_hard_limit}')
+	if parent.findChild(QLabel, 'j_max_position_limit_lb'):
+		j_max_position_limit = parent.status.joint[0]['max_position_limit']
+		parent.j_max_position_limit_lb.setText(f'Max_posn_lmt: {j_max_position_limit}')
+	if parent.findChild(QLabel, 'j_max_soft_limit_lb'):
+		j_max_soft_limit = parent.status.joint[0]['max_soft_limit']
+		parent.j_max_soft_limit_lb.setText(f'Max_soft_limit: {j_max_soft_limit}')
+	if parent.findChild(QLabel, 'j_min_ferror_lb'):
+		j_min_ferror = parent.status.joint[0]['min_ferror']
+		parent.j_min_ferror_lb.setText(f'Min_ferror: {j_min_ferror}')
+	if parent.findChild(QLabel, 'j_min_hard_limit_lb'):
+		j_min_hard_limit = parent.status.joint[0]['min_hard_limit']
+		parent.j_min_hard_limit_lb.setText(f'Min_hard_limit: {j_min_hard_limit}')
+	if parent.findChild(QLabel, 'j_min_position_limit_lb'):
+		j_min_position_limit = parent.status.joint[0]['min_position_limit']
+		parent.j_min_position_limit_lb.setText(f'Min_posn_lmt: {j_min_position_limit}')
+	if parent.findChild(QLabel, 'j_min_soft_limit_lb'):
+		j_min_soft_limit = parent.status.joint[0]['min_soft_limit']
+		parent.j_min_soft_limit_lb.setText(f'Min_soft_limit: {j_min_soft_limit}')
+	if parent.findChild(QLabel, 'j_output_lb'):
+		j_output = parent.status.joint[0]['output']
+		parent.j_output_lb.setText(f'Output: {j_output}')
+	if parent.findChild(QLabel, 'j_override_limits_lb'):
+		j_override_limits = parent.status.joint[0]['override_limits']
+		parent.j_override_limits_lb.setText(f'Override_limits: {j_override_limits}')
+	if parent.findChild(QLabel, 'j_units_lb'):
+		j_units = round(parent.status.joint[0]['units'],4)
+		parent.j_units_lb.setText(f'Units: {j_units}')
+	if parent.findChild(QLabel, 'j_velocity_lb'):
+		j_velocity = parent.status.joint[0]['velocity']
+		parent.j_velocity_lb.setText(f'Velocity: {j_velocity}')
 
 	flood_state = parent.status.flood
 	if parent.findChild(QPushButton, 'coolant_flood_pb'):
