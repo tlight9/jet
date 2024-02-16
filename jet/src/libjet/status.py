@@ -52,7 +52,7 @@ def update(parent):
 		parent.s_brake_lb.setText(f'Brake: {s_brake}')
 	if parent.findChild(QLabel, 's_direction_lb'):
 		s_direction = parent.status.spindle[0]['direction']		
-		parent.s_direction_lb.setText(f'Directiond: {s_direction}')
+		parent.s_direction_lb.setText(f'Direction: {s_direction}')
 	if parent.findChild(QLabel, 's_enabled_lb'):
 		s_enabled = parent.status.spindle[0]['enabled']		
 		parent.s_enabled_lb.setText(f'Enabled: {s_enabled}')
