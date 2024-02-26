@@ -3,4 +3,7 @@ jet/src/*.ui usr/lib/libjet
 jet/src/libjet/*.qss usr/lib/libjet
 
 jet/src/libjet/*.py usr/lib/python3/dist-packages/libjet
+jet/src/libjet/widgets/*.py usr/lib/python3/dist-packages/libjet/widgets
 
+jet/src/libjet/widgets/plugins/halmeter_plugin.py usr/lib/python3/dist-packages/libjet/widgets/plugins
+jet/src/libjet/widgets/plugins/jet_plugin.py usr/lib/x86_64-linux-gnu/qt5/plugins/designer/python
