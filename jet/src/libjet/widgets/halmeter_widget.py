@@ -86,6 +86,7 @@ class HalMeterWidget(QtWidgets.QWidget):
 						self._max = float(pin["VALUE"])
 						self.pin_actual.setText(pin["NAME"])
 					self._value = float(pin["VALUE"])
+					break
 				except ValueError:
 					pass
 
