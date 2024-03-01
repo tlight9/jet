@@ -41,6 +41,9 @@ class HalMeterWidget(QtWidgets.QWidget):
 
 		self.pin_label = QtWidgets.QLineEdit("Enter Pin")
 		self.mainlayout.addWidget(self.pin_label)
+		
+		self.pin_actual = QtWidgets.QLabel("")
+		self.mainlayout.addWidget(self.pin_actual)
 
 		self.value_label = QtWidgets.QLabel("0.0000")
 		self.value_label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -81,7 +84,7 @@ class HalMeterWidget(QtWidgets.QWidget):
 						self._label = pin["NAME"]
 						self._min = float(pin["VALUE"])
 						self._max = float(pin["VALUE"])
-
+						self.pin_actual.setText(pin["NAME"])
 					self._value = float(pin["VALUE"])
 				except ValueError:
 					pass
