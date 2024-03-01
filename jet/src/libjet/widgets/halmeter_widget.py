@@ -8,16 +8,13 @@ import random
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtCore import pyqtProperty
 
-LCNC_WORKING = False
-if LCNC_WORKING:
-	import hal
+import hal
 
 class HalMeterWidget(QtWidgets.QWidget):
 	def __init__(self, parent=None, sim=False):
 		super().__init__(parent)
 
-		if LCNC_WORKING:
-			h = hal.component(f"halmeter-{random.randint(0, 1000)}")
+		self.h = hal.component(f"halmeter-{random.randint(0, 1000)}")
 		self._value = 0.0
 		self._min = 0.0
 		self._max = 0.0
@@ -32,8 +29,8 @@ class HalMeterWidget(QtWidgets.QWidget):
 			self.cyclic_timer = QtCore.QTimer(self)
 			self.cyclic_timer.timeout.connect(self.periodic)
 			self.cyclic_timer.start(100)
-		if LCNC_WORKING:
-			h.ready()
+
+		self.h.ready()
 
 	def setupUi(self, parent):
 		self.setMinimumSize(100, 100)
@@ -75,21 +72,19 @@ class HalMeterWidget(QtWidgets.QWidget):
 
 	def periodic(self):
 		"""Update the display every 100 ms"""
+		current_dict = hal.get_info_pins()
+		for pin in current_dict:
+			if self.pin_label.text() in pin["NAME"]:
+				try:
+					# Reset Min and Max if the label changes
+					if pin["NAME"] != self._label:
+						self._label = pin["NAME"]
+						self._min = float(pin["VALUE"])
+						self._max = float(pin["VALUE"])
 
-		if LCNC_WORKING:
-			current_dict = hal.get_info_pins()
-			for pin in current_dict:
-				if self.pin_label.toPlainText() in pin["NAME"]:
-					try:
-						# Reset Min and Max if the label changes
-						if pin["NAME"] != self._label:
-							self._label = pin["NAME"]
-							self._min = float(pin["VALUE"])
-							self._max = float(pin["VALUE"])
-
-						self._value = float(pin["VALUE"])
-					except ValueError:
-						pass
+					self._value = float(pin["VALUE"])
+				except ValueError:
+					pass
 
 		self.value_label.setText(f"{self._value:.4f}")
 		self._min = min(self._min, self._value)
